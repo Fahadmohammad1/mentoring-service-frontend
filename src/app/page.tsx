@@ -1,3 +1,4 @@
+import { isLoggedIn } from "@/services/auth.service";
 import React from "react";
 
 const HomePage = () => {

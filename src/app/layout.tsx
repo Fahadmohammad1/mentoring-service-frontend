@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "@/lib/Providers";
 import Layout from "@/components/Layout/Layout";
+import { isLoggedIn } from "@/services/auth.service";
 
 const inter = Inter({ subsets: ["latin"] });
 

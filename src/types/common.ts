@@ -9,6 +9,12 @@ export type ResponseSuccessType = {
   meta?: IMeta;
 };
 
+export type IUser = {
+  userId: string | null;
+  email: string | null;
+  role: string | null;
+};
+
 export type IGenericErrorResponse = {
   statusCode: number;
   message: string;

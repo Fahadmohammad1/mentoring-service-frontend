@@ -17,13 +17,33 @@ import { useEffect, useState } from "react";
 import { Badge } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Link from "next/link";
+import {
+  getUserInfo,
+  isLoggedIn,
+  removeUserInfo,
+} from "@/services/auth.service";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { tokenKey } from "@/constants/tokenKey";
+import { getFromLocalStorage } from "@/utils/local-storage";
+import { setUser } from "@/redux/features/user/userSlice";
+import { IUser } from "@/types";
 
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Login", "Dashboard", "Logout"];
+const settings = ["Profile", "Login", "Logout"];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
   const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null);
+
+  const dispatch = useAppDispatch();
+
+  const userData = getFromLocalStorage(tokenKey);
+
+  if (userData) {
+    const { userId, email, role } = getUserInfo() as IUser;
+
+    dispatch(setUser({ userId, email, role }));
+  }
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -58,6 +78,13 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const { user } = useAppSelector((state) => state.user);
+
+  const handleLogout = () => {
+    removeUserInfo(tokenKey);
+    dispatch(setUser({ userId: null, email: null, role: null }));
+  };
 
   return (
     <nav>
@@ -198,13 +225,18 @@ const Navbar = () => {
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     {setting === "Profile" && (
-                      <Typography textAlign="center">
+                      <Typography className="px-4" textAlign="center">
                         <Link href="/profile">Profile</Link>
                       </Typography>
                     )}
-                    {setting === "Login" && (
-                      <Typography textAlign="center">
+                    {!user.email && setting === "Login" && (
+                      <Typography className="px-4" textAlign="center">
                         <Link href="/login">Login</Link>
+                      </Typography>
+                    )}
+                    {user.email && setting === "Logout" && (
+                      <Typography className="px-4" textAlign="center">
+                        <button onClick={handleLogout}>Logout</button>
                       </Typography>
                     )}
                   </MenuItem>
