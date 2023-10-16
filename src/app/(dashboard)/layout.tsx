@@ -1,4 +1,3 @@
-import Contents from "@/components/ui/Contents";
 import Sidebar from "@/components/ui/Sidebar";
 import React from "react";
 

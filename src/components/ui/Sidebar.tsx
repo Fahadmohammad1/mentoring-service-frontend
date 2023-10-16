@@ -20,6 +20,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import HomeIcon from "@mui/icons-material/Home";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import Link from "next/link";
 
 const drawerWidth = 240;
 
@@ -107,11 +110,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className="bg-white shadow-none border"
-        open={open}
-      >
+      <AppBar position="fixed" className="bg-white shadow-none" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -147,7 +146,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {["Profile", "Starred", "Send email"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -163,7 +162,9 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                     justifyContent: "center",
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index === 0 && <HomeIcon />}
+                  {index === 1 && <MailIcon />}
+                  {index === 2 && <DeleteOutlinedIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -172,7 +173,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
+          {["Home"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -188,7 +189,11 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                     justifyContent: "center",
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index === 0 && (
+                    <Link href="/">
+                      <HomeIcon className="text-rose-600" />
+                    </Link>
+                  )}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>

@@ -1,5 +1,5 @@
 "use client";
-import RootLayout from "@/components/Layout/Layout";
+
 import { store } from "@/redux/store";
 import { Provider } from "react-redux";
 

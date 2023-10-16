@@ -16,9 +16,10 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useEffect, useState } from "react";
 import { Badge } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import Link from "next/link";
 
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Login", "Dashboard", "Logout"];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
@@ -74,8 +75,6 @@ const Navbar = () => {
             <Typography
               variant="h6"
               noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -86,7 +85,7 @@ const Navbar = () => {
                 textDecoration: "none",
               }}
             >
-              MENTOR BD
+              <Link href="/">MENTOR BD</Link>
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -198,7 +197,16 @@ const Navbar = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    {setting === "Profile" && (
+                      <Typography textAlign="center">
+                        <Link href="/profile">Profile</Link>
+                      </Typography>
+                    )}
+                    {setting === "Login" && (
+                      <Typography textAlign="center">
+                        <Link href="/login">Login</Link>
+                      </Typography>
+                    )}
                   </MenuItem>
                 ))}
               </Menu>
