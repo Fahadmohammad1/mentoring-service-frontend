@@ -4,7 +4,7 @@ import React from "react";
 const HomePage = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <h1 className="text-7xl mt-16 text-center">home page is awesome</h1>
     </div>
   );
