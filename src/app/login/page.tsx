@@ -6,7 +6,10 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { useUserLoginMutation } from "@/redux/api/authApi";
+import {
+  useUserLoginMutation,
+  useUserSignupMutation,
+} from "@/redux/api/authApi";
 import { useRouter } from "next/navigation";
 import { storeUserInfo } from "@/services/auth.service";
 import toast, { Toaster } from "react-hot-toast";
@@ -15,11 +18,15 @@ type Inputs = {
   email?: string;
   password?: string;
   confirmPass?: string;
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
 };
 
 const LoginPage = () => {
   const [alignment, setAlignment] = useState("login");
   const [userLogin] = useUserLoginMutation();
+  const [userSignup] = useUserSignupMutation();
   const router = useRouter();
 
   const {
@@ -38,15 +45,28 @@ const LoginPage = () => {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const res = await userLogin({ ...data }).unwrap();
+    const { email, password } = data;
+    if (alignment === "login") {
+      const res = await userLogin({ email, password }).unwrap();
 
-    if (res?.token) {
-      router.push("/profile");
-      toast.success("Login successfull!");
+      if (res?.token) {
+        router.push("/profile");
+        toast.success("Login successfull!");
+      }
+      storeUserInfo({ accessToken: res?.token });
+
+      reset();
+    } else {
+      const res = await userSignup({ ...data }).unwrap();
+
+      if (res?.token) {
+        router.push("/profile");
+        toast.success("Sign up successfull!");
+      }
+      storeUserInfo({ accessToken: res?.token });
+
+      reset();
     }
-    storeUserInfo({ accessToken: res?.token });
-
-    reset();
   };
 
   return (
@@ -59,16 +79,13 @@ const LoginPage = () => {
           <div className="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12">
             <div className="flex flex-col items-center justify-center w-full h-full relative lg:pr-10">
               <Image
-                width={500}
+                width={450}
                 height={400}
                 src={loginImage}
                 className="btn-"
                 alt="login"
               />
             </div>
-          </div>
-
-          <div className="w-full mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12">
             <ToggleButtonGroup
               className="flex justify-center"
               color="primary"
@@ -77,23 +94,31 @@ const LoginPage = () => {
               onChange={handleChange}
               aria-label="Platform"
             >
-              <ToggleButton value="login" className="rounded-full">
+              <ToggleButton
+                value="login"
+                className={`${
+                  alignment === "login" && "bg-[#00DFBF] text-white"
+                } bg-white text-black rounded-full`}
+              >
                 Login
               </ToggleButton>
               <ToggleButton value="signup" className="rounded-full">
                 Sign Up
               </ToggleButton>
             </ToggleButtonGroup>
+          </div>
+
+          <div className="w-full mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12">
             {alignment === "login" ? (
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col items-start justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl
+                className="flex flex-col items-start justify-start pt-6 pr-10 pb-6 pl-10 bg-white shadow-2xl rounded-xl
             relative z-10"
               >
-                <p className="w-full text-4xl font-medium text-center leading-snug font-serif">
+                <p className="w-full text-2xl font-medium text-center leading-snug font-serif text-[#151D34]">
                   Please login to your account
                 </p>
-                <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
+                <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-7">
                   <div className="relative">
                     <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
                       Email
@@ -103,7 +128,7 @@ const LoginPage = () => {
                       placeholder="abc@gmail.com"
                       type="text"
                       className="border placeholder-gray-400 focus:outline-none
- focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+ focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
                   border-gray-300 rounded-md"
                     />
                     {errors.email && (
@@ -119,7 +144,7 @@ const LoginPage = () => {
                       placeholder="Password"
                       type="password"
                       className="border placeholder-gray-400 focus:outline-none
-                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+                  focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
                   border-gray-300 rounded-md"
                     />
                     {errors.password && (
@@ -129,7 +154,7 @@ const LoginPage = () => {
                   <div className="relative">
                     <input
                       type="submit"
-                      className="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-[#00DFBF]
+                      className="w-full inline-block pt-3 pr-5 pb-3 pl-5 text-xl font-medium text-center text-white bg-[#00DFBF]
                   rounded-lg transition duration-200 hover:bg-[#2B444E] ease"
                     />
                   </div>
@@ -138,13 +163,62 @@ const LoginPage = () => {
             ) : (
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col items-start justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl
+                className="flex flex-col items-start justify-start pt-4 pr-10 pb-6 pl-10 bg-white shadow-2xl rounded-xl
             relative z-10"
               >
-                <p className="w-full text-4xl font-medium text-center leading-snug font-serif">
+                <p className="w-full text-2xl font-medium text-center leading-snug font-serif">
                   Create new account
                 </p>
-                <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
+                <div className="w-full mt-4 mr-0 mb-0 ml-0 relative space-y-7">
+                  <div className="relative">
+                    <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                      First Name
+                    </p>
+                    <input
+                      {...register("firstName", { required: true })}
+                      placeholder="Mr"
+                      type="text"
+                      className="border placeholder-gray-400 focus:outline-none
+ focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+                  border-gray-300 rounded-md"
+                    />
+                    {errors.firstName && (
+                      <span className="text-red-600">
+                        Firstname is required
+                      </span>
+                    )}
+                  </div>
+                  <div className="relative">
+                    <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                      Middle Name
+                    </p>
+                    <input
+                      {...register("middleName")}
+                      placeholder="Jhon"
+                      type="text"
+                      className="border placeholder-gray-400 focus:outline-none
+ focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+                  border-gray-300 rounded-md"
+                    />
+                  </div>
+                  <div className="relative">
+                    <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                      Last Name
+                    </p>
+                    <input
+                      {...register("lastName", { required: true })}
+                      placeholder="Doe"
+                      type="text"
+                      className="border placeholder-gray-400 focus:outline-none
+                  focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+                  border-gray-300 rounded-md"
+                    />
+                    {errors.lastName && (
+                      <span className="text-red-600">
+                        last name is required
+                      </span>
+                    )}
+                  </div>
                   <div className="relative">
                     <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
                       Email
@@ -152,9 +226,9 @@ const LoginPage = () => {
                     <input
                       {...register("email", { required: true })}
                       placeholder="abc@gmail.com"
-                      type="text"
+                      type="email"
                       className="border placeholder-gray-400 focus:outline-none
- focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+ focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
                   border-gray-300 rounded-md"
                     />
                     {errors.email && (
@@ -167,39 +241,22 @@ const LoginPage = () => {
                     </p>
                     <input
                       {...register("password", { required: true })}
-                      placeholder="Password"
+                      placeholder="Enter a strong password"
                       type="password"
                       className="border placeholder-gray-400 focus:outline-none
-                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+                  focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
                   border-gray-300 rounded-md"
                     />
                     {errors.password && (
                       <span className="text-red-600">Password is required</span>
                     )}
                   </div>
-                  <div className="relative">
-                    <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                      Confirm Password
-                    </p>
-                    <input
-                      {...register("confirmPass", { required: true })}
-                      placeholder="confirm password"
-                      type="password"
-                      className="border placeholder-gray-400 focus:outline-none
-                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
-                  border-gray-300 rounded-md"
-                    />
-                    {errors.confirmPass && (
-                      <span className="text-red-600">
-                        Confirm Password is required
-                      </span>
-                    )}
-                  </div>
+
                   <div className="relative">
                     <input
                       type="submit"
-                      className="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-[#00DFBF]
-                  rounded-lg transition duration-200 hover:bg-[#2B444E] ease"
+                      className="w-full inline-block pt-3 pr-5 pb-3 pl-5 text-xl font-medium text-center text-black bg-[#00DFBF]
+                  rounded-lg transition duration-200 hover:bg-[#2B444E] hover:text-white ease"
                     />
                   </div>
                 </div>
