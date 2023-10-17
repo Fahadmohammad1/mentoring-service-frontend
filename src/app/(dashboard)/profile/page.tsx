@@ -9,7 +9,9 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useMyProfileQuery } from "@/redux/api/profileApi";
 import Loading from "@/components/ui/Loading";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useAppSelector } from "@/redux/hooks";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -25,13 +27,24 @@ const VisuallyHiddenInput = styled("input")({
 
 const ProfilePage = () => {
   const { data, isLoading } = useMyProfileQuery({});
+
   const router = useRouter();
+  const { user } = useAppSelector((state) => state.user);
+
+  const [alignment, setAlignment] = useState("web");
+
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string
+  ) => {
+    setAlignment(newAlignment);
+  };
 
   useEffect(() => {
-    if (!data) {
+    if (!user.email) {
       router.push("/");
     }
-  }, [data, router]);
+  }, [user, router]);
 
   if (isLoading) {
     return <Loading />;
@@ -105,21 +118,21 @@ const ProfilePage = () => {
         className="rounded-lg w-full border"
       >
         <h3 className="font-bold text-center py-1">Profile Information</h3>
-        <div className="lg:grid grid-cols-2 gap-2 p-5">
+        <div className="lg:grid grid-cols-2 gap-1 p-5">
           {firstName && (
             <div className="">
-              <span className="text-xs">First Name</span>
+              <span className="text-xs lg:ml-[30px]">First Name</span>
               {firstName ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border mx-auto"
                 >
                   <p className="text-center py-1">{firstName}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">Not set</p>
                 </Card>
@@ -128,18 +141,18 @@ const ProfilePage = () => {
           )}
           {middleName && (
             <div className="">
-              <span className="text-xs">Middle Name</span>
+              <span className="text-xs lg:ml-[30px]">Middle Name</span>
               {middleName ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{middleName}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">Not set</p>
                 </Card>
@@ -148,18 +161,18 @@ const ProfilePage = () => {
           )}
           {lastName && (
             <div className="">
-              <span className="text-xs">Last Name</span>
+              <span className="text-xs lg:ml-[30px]">Last Name</span>
               {lastName ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{lastName}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{lastName}</p>
                 </Card>
@@ -168,18 +181,18 @@ const ProfilePage = () => {
           )}
           {email && (
             <div className="">
-              <span className="text-xs">Email</span>
+              <span className="text-xs lg:ml-[30px]">Email</span>
               {email ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{email}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">Not set</p>
                 </Card>
@@ -188,18 +201,18 @@ const ProfilePage = () => {
           )}
           {contactNo && (
             <div className="">
-              <span className="text-xs">Contact</span>
+              <span className="text- lg:ml-[30px]">Contact</span>
               {contactNo ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{contactNo}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">Not set</p>
                 </Card>
@@ -208,18 +221,18 @@ const ProfilePage = () => {
           )}
           {gender && (
             <div className="">
-              <span className="text-xs">Gender</span>
+              <span className="text-xs  lg:ml-[30px]">Gender</span>
               {gender ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{gender}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-7 border"
+                  className="rounded-lg w-full mb-7 border  mx-auto"
                 >
                   <p className="text-center py-1">Not set</p>
                 </Card>
@@ -228,18 +241,18 @@ const ProfilePage = () => {
           )}
           {studentClass && (
             <div className="">
-              <span className="text-xs">Class</span>
+              <span className="text-xs  lg:ml-[30px]">Class</span>
               {studentClass ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{studentClass}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">Not set</p>
                 </Card>
@@ -248,18 +261,18 @@ const ProfilePage = () => {
           )}
           {degree && (
             <div className="">
-              <span className="text-xs">Degree</span>
+              <span className="text-xs  lg:ml-[30px]">Degree</span>
               {degree ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{degree}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">Not set</p>
                 </Card>
@@ -268,38 +281,18 @@ const ProfilePage = () => {
           )}
           {occupation && (
             <div className="">
-              <span className="text-xs">Degree</span>
+              <span className="text-xs  lg:ml-[30px]">Occupation</span>
               {occupation ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{occupation}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
-                >
-                  <p className="text-center py-1">Not set</p>
-                </Card>
-              )}
-            </div>
-          )}
-          {occupation && (
-            <div className="">
-              <span className="text-xs">Degree</span>
-              {occupation ? (
-                <Card
-                  sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
-                >
-                  <p className="text-center py-1">{occupation}</p>
-                </Card>
-              ) : (
-                <Card
-                  sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">Not set</p>
                 </Card>
@@ -308,18 +301,18 @@ const ProfilePage = () => {
           )}
           {designation && (
             <div className="">
-              <span className="text-xs">Degree</span>
+              <span className="text-xs  lg:ml-[30px]">Designation</span>
               {designation ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{designation}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">Not set</p>
                 </Card>
@@ -328,24 +321,39 @@ const ProfilePage = () => {
           )}
           {institutionName && (
             <div className="">
-              <span className="text-xs">Institution</span>
+              <span className="text-xs  lg:ml-[30px]">Institution</span>
               {institutionName ? (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">{institutionName}</p>
                 </Card>
               ) : (
                 <Card
                   sx={{ maxWidth: 290 }}
-                  className="rounded-lg w-full mb-4 border"
+                  className="rounded-lg w-full mb-4 border  mx-auto"
                 >
                   <p className="text-center py-1">Not set</p>
                 </Card>
               )}
             </div>
           )}
+        </div>
+        <div>
+          <h5 className="text-black text-center my-3 font-semibold">
+            Create profile as
+          </h5>
+          <div className="w-full flex justify-center items-end">
+            <ButtonGroup
+              variant="contained"
+              aria-label="outlined primary button group"
+            >
+              <Button className="text-black">Student</Button>
+              <Button className="text-black">Guardian</Button>
+              <Button className="text-black">Teacher</Button>
+            </ButtonGroup>
+          </div>
         </div>
       </Card>
     </section>
