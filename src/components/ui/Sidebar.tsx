@@ -18,7 +18,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import HomeIcon from "@mui/icons-material/Home";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
@@ -52,7 +51,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -110,7 +108,11 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" className="bg-white shadow-none" open={open}>
+      <AppBar
+        position="fixed"
+        className="bg-[#fffdf4] shadow-none border-b"
+        open={open}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -130,7 +132,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
             noWrap
             component="div"
           >
-            Dashboard
+            Welcome to Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
@@ -175,28 +177,31 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         <List>
           {["Home"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index === 0 && (
-                    <Link href="/">
+              {index === 0 && (
+                <Link href="/">
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                      }}
+                    >
                       <HomeIcon className="text-rose-600" />
-                    </Link>
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={text}
+                      sx={{ opacity: open ? 1 : 0 }}
+                    />
+                  </ListItemButton>
+                </Link>
+              )}
             </ListItem>
           ))}
         </List>

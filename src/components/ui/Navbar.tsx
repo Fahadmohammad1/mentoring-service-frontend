@@ -17,16 +17,13 @@ import { useEffect, useState } from "react";
 import { Badge } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Link from "next/link";
-import {
-  getUserInfo,
-  isLoggedIn,
-  removeUserInfo,
-} from "@/services/auth.service";
+import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { tokenKey } from "@/constants/tokenKey";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import { setUser } from "@/redux/features/user/userSlice";
 import { IUser } from "@/types";
+import { useRouter } from "next/navigation";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Login", "Logout"];
