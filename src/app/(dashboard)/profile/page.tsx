@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/redux/hooks";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import BreadCrumb from "@/components/ui/BreadCrumb";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -31,7 +32,7 @@ const ProfilePage = () => {
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
 
-  const [alignment, setAlignment] = useState("web");
+  const [alignment, setAlignment] = useState("student");
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -349,9 +350,24 @@ const ProfilePage = () => {
               variant="contained"
               aria-label="outlined primary button group"
             >
-              <Button className="text-black">Student</Button>
-              <Button className="text-black">Guardian</Button>
-              <Button className="text-black">Teacher</Button>
+              <Button
+                onClick={() => router.push("/profile/createStudent")}
+                className="text-black"
+              >
+                Student
+              </Button>
+              <Button
+                onClick={() => router.push("/profile/createGuardian")}
+                className="text-black"
+              >
+                Guardian
+              </Button>
+              <Button
+                onClick={() => router.push("/profile/createTeacher")}
+                className="text-black"
+              >
+                Teacher
+              </Button>
             </ButtonGroup>
           </div>
         </div>

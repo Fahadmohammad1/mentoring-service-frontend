@@ -16,6 +16,12 @@ export const authApi = baseApi.injectEndpoints({
         data: loginData,
       }),
     }),
+    resetToken: build.mutation({
+      query: () => ({
+        url: "/auth/reset-token",
+        method: "POST",
+      }),
+    }),
   }),
 });
 
