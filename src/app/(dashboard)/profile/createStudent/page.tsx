@@ -1,10 +1,14 @@
 "use client";
 
+import UploadImage from "@/components/Form/UploadImage";
 import BreadCrumb from "@/components/ui/BreadCrumb";
+import { tokenKey } from "@/constants/tokenKey";
+import { useResetTokenMutation } from "@/redux/api/authApi";
 import { useCreateStudentMutation } from "@/redux/api/profileApi";
 import { useAppSelector } from "@/redux/hooks";
+import { removeUserInfo, storeUserInfo } from "@/services/auth.service";
 import { Card } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
@@ -13,19 +17,31 @@ type Inputs = {
   presentAddress: string;
   class: string;
   institutionName: string;
-  avatar: string;
 };
 
-const CreateProfilePage = () => {
+interface CreateProfilePageProps {
+  _: any;
+  searchParams: {
+    query: string;
+  };
+}
+
+const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
+  _: any,
+  searchParams,
+}) => {
   const [createStudent] = useCreateStudentMutation();
+  const [resetToken] = useResetTokenMutation();
+  const [imageUrl, setImageUrl] = useState("");
+
   const { userId } = useAppSelector((state) => state.user.user);
+
   const fields = [
     { Contact: "contactNo" },
     { Gender: "gender" },
     { Address: "presentAddress" },
     { class: "class" },
     { institution: "institutionName" },
-    { Avatar: "avatar" },
   ];
   const {
     register,
@@ -36,9 +52,20 @@ const CreateProfilePage = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const res = await createStudent({ ...data, userId });
-    console.log(res);
-    reset();
+    const res: Record<string, unknown> = await createStudent({
+      ...data,
+      userId,
+      avatar: imageUrl,
+      role: searchParams.query,
+    });
+
+    if (res?.data) {
+      const { token } = await resetToken({}).unwrap();
+      removeUserInfo(tokenKey);
+      if (await token) {
+        storeUserInfo({ accessToken: token });
+      }
+    }
   };
 
   return (
@@ -86,6 +113,9 @@ const CreateProfilePage = () => {
                     )}
                 </div>
               ))}
+              <div className="relative mb-3">
+                <UploadImage setImageUrl={setImageUrl} />
+              </div>
             </div>
             <div className="relative">
               <input

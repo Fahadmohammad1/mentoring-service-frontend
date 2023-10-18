@@ -1,3 +1,4 @@
+import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
 export const profileApi = baseApi.injectEndpoints({
@@ -7,6 +8,7 @@ export const profileApi = baseApi.injectEndpoints({
         url: "/profile",
         method: "GET",
       }),
+      providesTags: [tagTypes.user],
     }),
     createStudent: build.mutation({
       query: (studentData) => ({
@@ -14,6 +16,7 @@ export const profileApi = baseApi.injectEndpoints({
         method: "POST",
         data: studentData,
       }),
+      invalidatesTags: [tagTypes.user],
     }),
     createGuardian: build.mutation({
       query: (guardianData) => ({
@@ -21,6 +24,7 @@ export const profileApi = baseApi.injectEndpoints({
         method: "POST",
         data: guardianData,
       }),
+      invalidatesTags: [tagTypes.user],
     }),
     createTeacher: build.mutation({
       query: (teacherData) => ({
@@ -28,6 +32,7 @@ export const profileApi = baseApi.injectEndpoints({
         method: "POST",
         data: teacherData,
       }),
+      invalidatesTags: [tagTypes.user],
     }),
   }),
 });

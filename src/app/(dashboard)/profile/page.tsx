@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/redux/hooks";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import BreadCrumb from "@/components/ui/BreadCrumb";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -32,15 +31,6 @@ const ProfilePage = () => {
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
 
-  const [alignment, setAlignment] = useState("student");
-
-  const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
-  ) => {
-    setAlignment(newAlignment);
-  };
-
   useEffect(() => {
     if (!user.email) {
       router.push("/");
@@ -51,8 +41,6 @@ const ProfilePage = () => {
     return <Loading />;
   }
 
-  const role = "student";
-
   // user data
   const firstName = data?.firstName;
   const middleName = data?.middleName;
@@ -60,17 +48,30 @@ const ProfilePage = () => {
   const email = data?.email;
 
   // profile data
-  const avatar = data?.Profile[0];
-  const fullName = data?.Profile[0];
-  const degree = data?.Profile[0];
-  const studentClass = data?.Profile[0];
-  const contactNo = data?.Profile[0];
-  const designation = data?.Profile[0];
-  const gender = data?.Profile[0];
-  const institutionName = data?.Profile[0];
-  const occupation = data?.Profile[0];
-  const presentAddress = data?.Profile[0];
-  const subjectOfExpertise = data?.Profile[0];
+  const profileData = data?.Profile[0] || {};
+
+  const fullName = profileData.fullName
+    ? profileData.fullName.toString()
+    : null;
+  const presentAddress = profileData.presentAddress
+    ? profileData.presentAddress.toString()
+    : null;
+  const contactNo = profileData.contactNo
+    ? profileData.contactNo.toString()
+    : null;
+  const avatar = profileData.avatar ? profileData.avatar.toString() : null;
+  const degree = profileData.degree ? profileData.degree.toString() : null;
+  const studentClass = profileData.class ? profileData.class.toString() : null;
+  const designation = profileData.designation
+    ? profileData.designation.toString()
+    : null;
+  const gender = profileData.gender ? profileData.gender.toString() : null;
+  const institutionName = profileData.institutionName
+    ? profileData.institutionName.toString()
+    : null;
+  const occupation = profileData.occupation
+    ? profileData.occupation.toString()
+    : null;
 
   return (
     <section className="h-full lg:flex gap-5">
@@ -341,36 +342,44 @@ const ProfilePage = () => {
             </div>
           )}
         </div>
-        <div>
-          <h5 className="text-black text-center my-3 font-semibold">
-            Create profile as
-          </h5>
-          <div className="w-full flex justify-center items-end">
-            <ButtonGroup
-              variant="contained"
-              aria-label="outlined primary button group"
-            >
-              <Button
-                onClick={() => router.push("/profile/createStudent")}
-                className="text-black"
+        {!profileData && (
+          <div>
+            <h5 className="text-black text-center my-3 font-semibold">
+              Create profile as
+            </h5>
+            <div className="w-full flex justify-center items-end">
+              <ButtonGroup
+                variant="contained"
+                aria-label="outlined primary button group"
               >
-                Student
-              </Button>
-              <Button
-                onClick={() => router.push("/profile/createGuardian")}
-                className="text-black"
-              >
-                Guardian
-              </Button>
-              <Button
-                onClick={() => router.push("/profile/createTeacher")}
-                className="text-black"
-              >
-                Teacher
-              </Button>
-            </ButtonGroup>
+                <Button
+                  onClick={() =>
+                    router.push("/profile/createStudent?query=student")
+                  }
+                  className="text-black"
+                >
+                  Student
+                </Button>
+                <Button
+                  onClick={() =>
+                    router.push("/profile/createGuardian?query=guardian")
+                  }
+                  className="text-black"
+                >
+                  Guardian
+                </Button>
+                <Button
+                  onClick={() =>
+                    router.push("/profile/createTeacher?query=teacher")
+                  }
+                  className="text-black"
+                >
+                  Teacher
+                </Button>
+              </ButtonGroup>
+            </div>
           </div>
-        </div>
+        )}
       </Card>
     </section>
   );

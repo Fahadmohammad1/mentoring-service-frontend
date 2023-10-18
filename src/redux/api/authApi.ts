@@ -1,3 +1,4 @@
+import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
 export const authApi = baseApi.injectEndpoints({
@@ -21,8 +22,13 @@ export const authApi = baseApi.injectEndpoints({
         url: "/auth/reset-token",
         method: "POST",
       }),
+      invalidatesTags: [tagTypes.user],
     }),
   }),
 });
 
-export const { useUserLoginMutation, useUserSignupMutation } = authApi;
+export const {
+  useUserLoginMutation,
+  useUserSignupMutation,
+  useResetTokenMutation,
+} = authApi;
