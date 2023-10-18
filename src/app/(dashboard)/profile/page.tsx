@@ -79,8 +79,12 @@ const ProfilePage = () => {
         <CardMedia
           component="img"
           height="180"
-          className="p-10 pb-0"
-          image="https://cdn-icons-png.flaticon.com/512/1053/1053244.png"
+          className="p-10 pb-0 rounded-full"
+          image={
+            avatar
+              ? avatar
+              : "https://cdn-icons-png.flaticon.com/512/1053/1053244.png"
+          }
           alt="profile"
         />
 
@@ -342,7 +346,7 @@ const ProfilePage = () => {
             </div>
           )}
         </div>
-        {!profileData && (
+        {!profileData?.id && (
           <div>
             <h5 className="text-black text-center my-3 font-semibold">
               Create profile as

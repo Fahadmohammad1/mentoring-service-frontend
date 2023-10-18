@@ -26,7 +26,7 @@ interface CreateProfilePageProps {
   };
 }
 
-const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
+const CreateStudentProfile: React.FC<CreateProfilePageProps> = ({
   _: any,
   searchParams,
 }) => {
@@ -131,4 +131,4 @@ const CreateProfilePage: React.FC<CreateProfilePageProps> = ({
   );
 };
 
-export default CreateProfilePage;
+export default CreateStudentProfile;
