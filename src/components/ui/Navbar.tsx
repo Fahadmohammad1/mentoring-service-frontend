@@ -23,7 +23,6 @@ import { tokenKey } from "@/constants/tokenKey";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import { setUser } from "@/redux/features/user/userSlice";
 import { IUser } from "@/types";
-import { useRouter } from "next/navigation";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Login", "Logout"];
@@ -95,21 +94,20 @@ const Navbar = () => {
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
             <Typography
               variant="h6"
               noWrap
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
-                fontSize: "30px",
+                fontSize: "35px",
                 fontFamily: "monospace",
-                fontWeight: 700,
+                fontWeight: 800,
                 letterSpacing: ".3rem",
                 textDecoration: "none",
               }}
             >
-              <Link href="/">MENTOR BD</Link>
+              <Link href="/">MENTOR</Link>
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -151,7 +149,7 @@ const Navbar = () => {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+
             <Typography
               variant="h5"
               noWrap
@@ -163,12 +161,12 @@ const Navbar = () => {
                 flexGrow: 1,
                 fontFamily: "monospace",
                 fontWeight: 700,
-                letterSpacing: ".3rem",
+                letterSpacing: ".2rem",
                 color: "#151D34",
                 textDecoration: "none",
               }}
             >
-              LOGO
+              MENTOR
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
@@ -184,25 +182,26 @@ const Navbar = () => {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <IconButton
-                className="mr-3"
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={3} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar
-                    alt="Remy Sharp"
-                    src="https://cdn-icons-png.flaticon.com/512/1053/1053244.png"
-                  />
+              <div className="flex">
+                <IconButton
+                  className="mr-3"
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={3} color="error">
+                    <NotificationsIcon />
+                  </Badge>
                 </IconButton>
-              </Tooltip>
-
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="https://cdn-icons-png.flaticon.com/512/1053/1053244.png"
+                    />
+                  </IconButton>
+                </Tooltip>
+              </div>
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"

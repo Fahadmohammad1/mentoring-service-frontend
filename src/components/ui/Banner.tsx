@@ -1,44 +1,27 @@
-import React from "react";
-import image from "../../assets/login.jpg";
 import Image from "next/image";
+import React from "react";
+import banner from "../../assets/banner.jpg";
+import { Button } from "@mui/material";
+import { SiGooglemeet } from "react-icons/si";
 
 const Banner = () => {
   return (
-    <section className=" bg-white dark:text-black h-screen">
-      <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
-        <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
-          <Image
-            width={500}
-            height={300}
-            src={image}
-            alt=""
-            className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
-          />
+    <section className=" dark:text-black h-screen mt-10">
+      <div className="lg:grid grid-cols-12">
+        <div className="col-span-8 mb-5">
+          <Image src={banner} width={920} height={200} alt="banner" />
         </div>
-        <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
-          <h1 className="text-5xl font-bold leadi sm:text-6xl">
-            Ac mattis
-            <span className="dark:text-violet-400">senectus</span>erat pharetra
+        <div className=" mx-auto flex flex-col justify-center items-center h-full text-center col-span-4">
+          <h1 className="text-[#151D34] lg:text-6xl text-3xl font-bold">
+            Learn from best teacher&apos;s around the world
           </h1>
-          <p className="mt-6 mb-8 text-lg sm:mb-12">
-            Dictum aliquam porta in condimentum ac integer
-          </p>
-          <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              className="px-8 py-3 text-lg font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
-            >
-              Suspendisse
-            </a>
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              className="px-8 py-3 text-lg font-semibold border rounded dark:border-gray-100"
-            >
-              Malesuada
-            </a>
-          </div>
+          <Button
+            variant="outlined"
+            className="flex items-center gap-3 mt-7 bg-white hover:border-1 hover:text-black hover:border-[#00DFBF]"
+          >
+            Book Session
+            <SiGooglemeet />
+          </Button>
         </div>
       </div>
     </section>
