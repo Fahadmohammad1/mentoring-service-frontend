@@ -7,7 +7,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 const ServiceCard = ({ service }: { service: IService }) => {
   return (
     <Link href={`/services/${service.id}`}>
-      <div className="p-4 items-center justify-center lg:w-[600px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-2xl hover:rounded-2xl">
+      <div className="p-4 items-center justify-center lg:w-[600px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-2xl hover:rounded-2xl border">
         <Image
           width={100}
           height={100}
@@ -45,7 +45,7 @@ const ServiceCard = ({ service }: { service: IService }) => {
             </div>
             <div className="flex items-center space-x-4 justify-between">
               <div className="text-grey-500 flex flex-row space-x-1  my-4">
-                <p className="text-xs">2 hours ago</p>
+                <p className="text-xs">{service?.duration}</p>
               </div>
               <div className="flex flex-row space-x-1">
                 <div className="bg-red-500 shadow-lg shadow- shadow-red-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row">

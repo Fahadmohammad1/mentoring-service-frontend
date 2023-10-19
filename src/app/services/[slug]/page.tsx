@@ -1,70 +1,72 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useSingleServiceQuery } from "@/redux/api/serviceApi";
 import Loading from "@/components/ui/Loading";
+import Image from "next/image";
+import Stack from "@mui/material/Stack";
+import Badge from "@mui/material/Badge";
 
 const ServiceDetailPage = ({ params }: { params: { slug: string } }) => {
   const { data, isLoading } = useSingleServiceQuery(params.slug);
   if (isLoading) {
     <Loading />;
   }
-
+  console.log(data);
   return (
     <section className="container mx-auto mt-20">
-      <div className="p-4 items-center justify-center mx-auto lg:w-[820px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-2xl hover:rounded-2xl">
-        <Image
-          width={100}
-          height={100}
-          className="mx-auto w-6/12 h-full rounded-lg"
-          alt="art cover"
-          loading="lazy"
-          src={data.thumbnail}
-        />
-        <div className="sm:w-8/12 pl-0 p-5">
-          <div className="space-y-2">
-            <div className="space-y-4">
-              <h4 className="text-md font-semibold text-cyan-900 text-justify">
-                {data.name}
-              </h4>
-            </div>
-            <div className="flex items-center space-x-4 justify-between">
-              <div className="flex gap-3 space-y-1">
+      <div className="bg-white text-black">
+        <Badge
+          color="primary"
+          badgeContent={data?.serviceType === "remote" ? "online" : "offline"}
+          max={1}
+        >
+          <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 shadow-xl">
+            <div className="mr-auto place-self-center lg:col-span-7">
+              <h1 className="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
+                {data?.name}
+              </h1>
+              <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                Welcome to Company Name, your gateway to unforgettable travel
+                experiences. We are a leading travel and tour company dedicated
+                to creating exceptional journeys for adventurers, explorers, and
+                wanderers like you.
+              </p>
+              <div className="flex items-center gap-6">
                 <Image
-                  height={50}
-                  width={50}
-                  src={data.authorImage}
-                  className="rounded-full h-8 w-8"
+                  src={data?.authorImage}
                   alt="avatar"
+                  width={100}
+                  height={100}
+                  className="rounded-full"
                 />
-                <span className="text-sm">{data.authorName}</span>
-              </div>
-              <div className=" px-3 py-1 rounded-lg flex space-x-2 flex-row">
-                <div className="cursor-pointer text-center text-md justify-center items-center flex">
-                  <span className="text-md mx-1">80</span>
-                </div>
-                <div className="cursor-pointer text-center text-md justify-center items-center flex">
-                  <span className="text-md mx-1">80</span>
+                <div className="flex justify-between w-full">
+                  <div>
+                    <h4 className="font-bold text-lg text-[#151D34]">
+                      {data?.authorName}
+                    </h4>
+                    <p>{data?.authorEmail}</p>
+                    <p>{data?.location}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg">
+                      Fee: $<span className="text-red-500">{data?.price}</span>
+                    </h4>
+                    <p>duration: {data?.duration}</p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="flex items-center space-x-4 justify-between">
-              <div className="text-grey-500 flex flex-row space-x-1  my-4">
-                <p className="text-xs">2 hours ago</p>
-              </div>
-              <div className="flex flex-row space-x-1">
-                <div className="bg-red-500 shadow-lg shadow- shadow-red-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row">
-                  <AiOutlineShoppingCart />
-                </div>
-                <div className="bg-green-500 shadow-lg shadow- shadow-green-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row">
-                  <span>Book</span>
-                </div>
-              </div>
+            <div className="hidden lg:mt-0 lg:col-span-5 lg:flex rounded-lg">
+              <Image
+                width={500}
+                height={300}
+                src={data?.thumbnail}
+                alt="mockup"
+                className="rounded-lg"
+              />
             </div>
           </div>
-        </div>
+        </Badge>
       </div>
     </section>
   );
