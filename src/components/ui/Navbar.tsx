@@ -12,7 +12,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { useEffect, useState } from "react";
 import { Badge } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -24,7 +23,7 @@ import { getFromLocalStorage } from "@/utils/local-storage";
 import { setUser } from "@/redux/features/user/userSlice";
 import { IUser } from "@/types";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = ["Services", "Pricing", "Blog"];
 const settings = ["Profile", "Login", "Logout"];
 
 const Navbar = () => {

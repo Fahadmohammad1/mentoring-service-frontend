@@ -1,11 +1,14 @@
+import Image from "next/image";
 import React from "react";
 
 const ServiceCard = () => {
   return (
     <section>
-      <div className="flex gap-10 h-full from-red-100 via-red-300 to-blue-500 bg-gradient-to-br">
+      <div className="flex gap-10 h-screen">
         <div className="p-4 items-center justify-center lg:w-[680px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-xl hover:rounded-2xl">
-          <img
+          <Image
+            width={100}
+            height={200}
             className="mx-auto w-full block w-4/12 h-40 rounded-lg"
             alt="art cover"
             loading="lazy"
