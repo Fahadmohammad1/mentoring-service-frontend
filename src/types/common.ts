@@ -25,3 +25,27 @@ export type IGenericErrorMessage = {
   path: string | number;
   message: string;
 };
+
+export enum ServiceType {
+  "onsite",
+  "remote",
+}
+
+export type IService = {
+  id: string;
+  userId: string;
+  thumbnail: string;
+  name: string;
+  location: string;
+  authorName: string;
+  authorEmail: string;
+  authorImage: string;
+  description: string;
+  category: string;
+  price: number;
+  duration: string;
+  badge: string[];
+  serviceType: ServiceType;
+  createdAt: string;
+  updatedAt: string;
+};

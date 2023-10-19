@@ -10,6 +10,7 @@ import { removeUserInfo, storeUserInfo } from "@/services/auth.service";
 import { Card } from "@mui/material";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export type Inputs = {
   contactNo: string;
@@ -50,6 +51,7 @@ const CreateStudentProfile = () => {
     });
 
     if (res?.data) {
+      toast.success("Profile created successfully");
       const { token } = await resetToken({}).unwrap();
       removeUserInfo(tokenKey);
       if (await token) {

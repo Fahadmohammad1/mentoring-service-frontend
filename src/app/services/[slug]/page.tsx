@@ -1,26 +1,33 @@
-import { IService } from "@/types";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+"use client";
 
-const ServiceCard = ({ service }: { service: IService }) => {
+import React from "react";
+import Image from "next/image";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useSingleServiceQuery } from "@/redux/api/serviceApi";
+import Loading from "@/components/ui/Loading";
+
+const ServiceDetailPage = ({ params }: { params: { slug: string } }) => {
+  const { data, isLoading } = useSingleServiceQuery(params.slug);
+  if (isLoading) {
+    <Loading />;
+  }
+
   return (
-    <Link href={`/services/${service.id}`}>
-      <div className="p-4 items-center justify-center lg:w-[600px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-2xl hover:rounded-2xl">
+    <section className="container mx-auto mt-20">
+      <div className="p-4 items-center justify-center mx-auto lg:w-[820px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-2xl hover:rounded-2xl">
         <Image
           width={100}
           height={100}
-          className="mx-auto w-4/12 h-40 rounded-lg"
+          className="mx-auto w-6/12 h-full rounded-lg"
           alt="art cover"
           loading="lazy"
-          src={service.thumbnail}
+          src={data.thumbnail}
         />
         <div className="sm:w-8/12 pl-0 p-5">
           <div className="space-y-2">
             <div className="space-y-4">
               <h4 className="text-md font-semibold text-cyan-900 text-justify">
-                {service.name}
+                {data.name}
               </h4>
             </div>
             <div className="flex items-center space-x-4 justify-between">
@@ -28,11 +35,11 @@ const ServiceCard = ({ service }: { service: IService }) => {
                 <Image
                   height={50}
                   width={50}
-                  src={service.authorImage}
+                  src={data.authorImage}
                   className="rounded-full h-8 w-8"
                   alt="avatar"
                 />
-                <span className="text-sm">{service.authorName}</span>
+                <span className="text-sm">{data.authorName}</span>
               </div>
               <div className=" px-3 py-1 rounded-lg flex space-x-2 flex-row">
                 <div className="cursor-pointer text-center text-md justify-center items-center flex">
@@ -59,8 +66,8 @@ const ServiceCard = ({ service }: { service: IService }) => {
           </div>
         </div>
       </div>
-    </Link>
+    </section>
   );
 };
 
-export default ServiceCard;
+export default ServiceDetailPage;

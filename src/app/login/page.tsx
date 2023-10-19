@@ -52,8 +52,8 @@ const LoginPage = () => {
       if (res?.token) {
         router.push("/profile");
         toast.success("Login successfull!");
+        storeUserInfo({ accessToken: res?.token });
       }
-      storeUserInfo({ accessToken: res?.token });
 
       reset();
     } else {
@@ -62,8 +62,8 @@ const LoginPage = () => {
       if (res?.token) {
         router.push("/profile");
         toast.success("Sign up successfull!");
+        storeUserInfo({ accessToken: res?.token });
       }
-      storeUserInfo({ accessToken: res?.token });
 
       reset();
     }

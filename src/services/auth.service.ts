@@ -11,7 +11,7 @@ export const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
 export const getUserInfo = () => {
   const authToken = getFromLocalStorage(tokenKey);
 
-  if (authToken) {
+  if (authToken && authToken !== "") {
     const decodedData = decodedToken(authToken);
     return decodedData;
   } else {

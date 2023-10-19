@@ -143,7 +143,11 @@ const Navbar = () => {
                     key={page}
                     onClick={handleCloseNavMenu}
                   >
-                    <Typography textAlign="center">{page}</Typography>
+                    {page === "Services" && (
+                      <Link href="/services">
+                        <Typography textAlign="center">{page}</Typography>
+                      </Link>
+                    )}
                   </MenuItem>
                 ))}
               </Menu>
@@ -175,7 +179,11 @@ const Navbar = () => {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                  {page}
+                  {page === "Services" && (
+                    <Link href="/services">
+                      <Typography textAlign="center">{page}</Typography>
+                    </Link>
+                  )}
                 </Button>
               ))}
             </Box>
