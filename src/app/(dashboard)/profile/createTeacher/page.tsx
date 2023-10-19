@@ -22,17 +22,7 @@ type Inputs = {
   subjectOfExpertise: string;
 };
 
-interface CreateTeacherProfilePageProps {
-  _: any;
-  searchParams: {
-    query: string;
-  };
-}
-
-const CreateTeacherProfile: React.FC<CreateTeacherProfilePageProps> = ({
-  _: any,
-  searchParams,
-}) => {
+const CreateTeacherProfile = () => {
   const [createTeacher] = useCreateTeacherMutation();
   const [resetToken] = useResetTokenMutation();
   const [imageUrl, setImageUrl] = useState("");
@@ -61,7 +51,7 @@ const CreateTeacherProfile: React.FC<CreateTeacherProfilePageProps> = ({
       ...data,
       userId,
       avatar: imageUrl,
-      role: searchParams.query,
+      role: "teacher",
       subjectOfExpertise: [data.subjectOfExpertise],
     });
 

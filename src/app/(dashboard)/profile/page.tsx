@@ -357,25 +357,19 @@ const ProfilePage = () => {
                 aria-label="outlined primary button group"
               >
                 <Button
-                  onClick={() =>
-                    router.push("/profile/createStudent?query=student")
-                  }
+                  onClick={() => router.push("/profile/createStudent")}
                   className="text-black"
                 >
                   Student
                 </Button>
                 <Button
-                  onClick={() =>
-                    router.push("/profile/createGuardian?query=guardian")
-                  }
+                  onClick={() => router.push("/profile/createGuardian")}
                   className="text-black"
                 >
                   Guardian
                 </Button>
                 <Button
-                  onClick={() =>
-                    router.push("/profile/createTeacher?query=teacher")
-                  }
+                  onClick={() => router.push("/profile/createTeacher")}
                   className="text-black"
                 >
                   Teacher

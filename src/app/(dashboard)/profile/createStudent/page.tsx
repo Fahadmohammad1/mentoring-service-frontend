@@ -11,7 +11,7 @@ import { Card } from "@mui/material";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-type Inputs = {
+export type Inputs = {
   contactNo: string;
   gender: string;
   presentAddress: string;
@@ -19,17 +19,7 @@ type Inputs = {
   institutionName: string;
 };
 
-interface CreateProfilePageProps {
-  _: any;
-  searchParams: {
-    query: string;
-  };
-}
-
-const CreateStudentProfile: React.FC<CreateProfilePageProps> = ({
-  _: any,
-  searchParams,
-}) => {
+const CreateStudentProfile = () => {
   const [createStudent] = useCreateStudentMutation();
   const [resetToken] = useResetTokenMutation();
   const [imageUrl, setImageUrl] = useState("");
@@ -56,7 +46,7 @@ const CreateStudentProfile: React.FC<CreateProfilePageProps> = ({
       ...data,
       userId,
       avatar: imageUrl,
-      role: searchParams.query,
+      role: "student",
     });
 
     if (res?.data) {
@@ -66,6 +56,7 @@ const CreateStudentProfile: React.FC<CreateProfilePageProps> = ({
         storeUserInfo({ accessToken: token });
       }
     }
+    reset();
   };
 
   return (
