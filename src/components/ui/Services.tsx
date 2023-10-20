@@ -12,7 +12,7 @@ const Services = () => {
   }
   return (
     <section className="container mx-auto">
-      <h1 className="text-3xl text-center text-[#151D34] font-bold my-3">
+      <h1 className="text-3xl text-center text-[#151D34] font-bold mt-3 mb-7">
         Services you can book
       </h1>
       <div className="lg:grid grid-cols-2 gap-5">

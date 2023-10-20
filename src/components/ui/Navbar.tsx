@@ -22,6 +22,7 @@ import { tokenKey } from "@/constants/tokenKey";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import { setUser } from "@/redux/features/user/userSlice";
 import { IUser } from "@/types";
+import { BsCartCheckFill } from "react-icons/bs";
 
 const pages = ["Services", "Pricing", "Blog"];
 const settings = ["Profile", "Login", "Logout"];
@@ -189,7 +190,10 @@ const Navbar = () => {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <div className="flex">
+              <div className="flex items-center">
+                <Badge badgeContent={1} color="error">
+                  <BsCartCheckFill className="text-xl"></BsCartCheckFill>
+                </Badge>
                 <IconButton
                   className="mr-3"
                   size="large"

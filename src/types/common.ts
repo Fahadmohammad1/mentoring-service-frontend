@@ -45,7 +45,7 @@ export type IService = {
   price: number;
   duration: string;
   badge: string[];
-  serviceType: ServiceType;
+  serviceType: string;
   createdAt: string;
   updatedAt: string;
 };
