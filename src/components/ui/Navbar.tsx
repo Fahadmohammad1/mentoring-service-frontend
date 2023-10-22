@@ -90,7 +90,7 @@ const Navbar = () => {
           transition: "background-color 0.3s ease",
         }}
         position="fixed"
-        className="text-[#151D34] z-50 shadow-none"
+        className="text-tertiary z-50 shadow-none"
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>

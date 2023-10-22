@@ -90,11 +90,11 @@ const ProfilePage = () => {
 
         <CardContent>
           {fullName ? (
-            <h3 className="text-[#151D34] text-xl font-bold text-center">
+            <h3 className="text-tertiary text-xl font-bold text-center">
               {fullName}
             </h3>
           ) : (
-            <h3 className="text-[#151D34] text-xl font-bold text-center">
+            <h3 className="text-tertiary text-xl font-bold text-center">
               Not set
             </h3>
           )}

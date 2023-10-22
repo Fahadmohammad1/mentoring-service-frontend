@@ -1,5 +1,5 @@
 import { IService } from "@/types";
-import { Badge } from "@mui/material";
+import { Badge, Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -13,7 +13,7 @@ const ServiceCard = ({ service }: { service: IService }) => {
         badgeContent={service?.serviceType === "remote" ? "online" : "offline"}
         max={1}
       >
-        <div className="p-4 items-center justify-center lg:w-[600px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-2xl hover:rounded-2xl border mx-auto">
+        <div className="p-4 items-center justify-center lg:w-[600px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-2xl hover:border mx-auto">
           <Image
             width={100}
             height={100}
@@ -50,13 +50,17 @@ const ServiceCard = ({ service }: { service: IService }) => {
                 <div className="text-grey-500 flex flex-row space-x-1  my-4">
                   <p className="text-xs">{service?.location}</p>
                 </div>
-                <div className="flex flex-row space-x-1">
-                  <div className="bg-red-500 shadow-lg shadow- shadow-red-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row">
+                <div className="flex flex-row space-x-1 justify-center gap-2">
+                  <div className="bg-green-500 shadow-lg shadow- shadow-green-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row">
                     <AiOutlineShoppingCart />
                   </div>
-                  <div className="bg-green-500 shadow-lg shadow- shadow-green-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row">
-                    <span>Book</span>
-                  </div>
+
+                  <Button
+                    variant="outlined"
+                    className="flex items-center gap-3  bg-white hover:border-1 hover:text-black hover:border-[#00DFBF]"
+                  >
+                    Book
+                  </Button>
                 </div>
               </div>
             </div>

@@ -41,7 +41,7 @@ const ServiceDetailPage = ({ params }: { params: { slug: string } }) => {
                 />
                 <div className="flex justify-between w-full">
                   <div>
-                    <h4 className="font-bold text-lg text-[#151D34]">
+                    <h4 className="font-bold text-lg text-tertiary">
                       {data?.authorName}
                     </h4>
                     <p>{data?.authorEmail}</p>

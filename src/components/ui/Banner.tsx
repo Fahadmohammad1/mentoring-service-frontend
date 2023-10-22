@@ -12,7 +12,7 @@ const Banner = () => {
           <Image src={banner} width={650} height={200} alt="banner" />
         </div>
         <div className="mx-auto flex flex-col justify-center items-center h-full text-center col-span-6">
-          <h1 className="text-[#151D34] lg:text-7xl text-3xl font-bold">
+          <h1 className="text-tertiary lg:text-7xl text-3xl font-bold">
             Learn from best teacher&apos;s around the world
           </h1>
           <Button

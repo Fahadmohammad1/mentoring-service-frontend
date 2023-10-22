@@ -8,17 +8,10 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      primary: "FFF2D8",
-      secondary: "EAD7BB",
-      tertiary: "BCA37F",
-      quarternary: "113946",
-    },
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      primary: "#FFF2D8",
+      secondary: "#EAD7BB",
+      tertiary: "#151D34",
+      quarternary: "#113946",
     },
   },
   plugins: [],
