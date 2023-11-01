@@ -94,7 +94,12 @@ const Navbar = () => {
       className="text-black z-50 shadow-none xl:px-7"
     >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar
+          style={{
+            borderBottom: isScrolled ? "2px solid #4EAC95" : "0px",
+          }}
+          disableGutters
+        >
           <Typography
             variant="h6"
             noWrap

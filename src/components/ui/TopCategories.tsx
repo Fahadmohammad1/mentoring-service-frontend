@@ -21,7 +21,7 @@ const TopCategories = () => {
   return (
     <section className="h-screen">
       <h1 className="text-3xl text-center text-black font-bold mb-10 mt-7">
-        Top Categories to learn
+        Featured Categories
       </h1>
       <div className="flex items-center gap-5">
         <div>
