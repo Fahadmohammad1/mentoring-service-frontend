@@ -203,9 +203,9 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <div className="flex items-center">
               <Badge badgeContent={1} color="error">
-                {/* <span onClick={handleOpenModal}>
-                    <BsFillBookmarkCheckFill className="text-xl"></BsFillBookmarkCheckFill>
-                  </span> */}
+                <span>
+                  <BsFillBookmarkCheckFill className="text-xl"></BsFillBookmarkCheckFill>
+                </span>
               </Badge>
               <IconButton
                 className="mr-3"

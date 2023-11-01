@@ -61,21 +61,34 @@ const ProfilePage = () => {
     : null;
   const avatar = profileData.avatar ? profileData.avatar.toString() : null;
   const degree = profileData.degree ? profileData.degree.toString() : null;
-  const studentClass = profileData.class ? profileData.class.toString() : null;
+  const classStandard = profileData.standard
+    ? profileData.standard.toString()
+    : null;
   const designation = profileData.designation
     ? profileData.designation.toString()
     : null;
   const gender = profileData.gender ? profileData.gender.toString() : null;
-  const institutionName = profileData.institutionName
-    ? profileData.institutionName.toString()
+  const institutionName = profileData.institution
+    ? profileData.institution.toString()
     : null;
   const occupation = profileData.occupation
     ? profileData.occupation.toString()
     : null;
+  const educationalStatus = profileData.educationalStatus
+    ? profileData.educationalStatus.toString()
+    : null;
+  const topicOfExpertise = profileData.topicOfExpertise
+    ? profileData.topicOfExpertise.toString()
+    : null;
+
+  console.log(topicOfExpertise);
 
   return (
     <section className="h-full lg:flex gap-5">
-      <Card sx={{ maxWidth: 290 }} className="rounded-lg lg:mb-0 mb-7 border">
+      <Card
+        sx={{ maxWidth: 290 }}
+        className="rounded-lg lg:mb-0 mb-7 border border-[#F9A14A]"
+      >
         <CardMedia
           component="img"
           height="180"
@@ -90,11 +103,11 @@ const ProfilePage = () => {
 
         <CardContent>
           {fullName ? (
-            <h3 className="text-[#151D34] text-xl font-bold text-center">
+            <h3 className="text-[#F9A14A] text-xl font-bold text-center">
               {fullName}
             </h3>
           ) : (
-            <h3 className="text-[#151D34] text-xl font-bold text-center">
+            <h3 className="text-[#F9A14A] text-xl font-bold text-center">
               Not set
             </h3>
           )}
@@ -107,7 +120,7 @@ const ProfilePage = () => {
           )}
           <div className="w-full flex justify-center mt-5">
             <Button
-              className="rounded-full py-1 hover:bg-white text-black border bg-[#00DFBF]"
+              className="rounded-full py-1 hover:bg-white text-black hover:border  bg-gray-400 hover:border-[#4EAC95]"
               component="label"
               variant="contained"
               startIcon={<CloudUploadIcon />}
@@ -121,12 +134,14 @@ const ProfilePage = () => {
       </Card>
       <Card
         sx={{ minWidth: 290, maxWidth: 750 }}
-        className="rounded-lg w-full border"
+        className="rounded-lg w-full border border-[#F9A14A]"
       >
-        <h3 className="font-bold text-center py-1">Profile Information</h3>
+        <h3 className="font-bold text-center py-1 text-[#F9A14A]">
+          Profile Information
+        </h3>
         <div className="lg:grid grid-cols-2 gap-1 p-5">
           {firstName && (
-            <div className="">
+            <div>
               <span className="text-xs lg:ml-[30px]">First Name</span>
               {firstName ? (
                 <Card
@@ -245,15 +260,15 @@ const ProfilePage = () => {
               )}
             </div>
           )}
-          {studentClass && (
+          {classStandard && (
             <div className="">
               <span className="text-xs  lg:ml-[30px]">Class</span>
-              {studentClass ? (
+              {classStandard ? (
                 <Card
                   sx={{ maxWidth: 290 }}
                   className="rounded-lg w-full mb-4 border  mx-auto"
                 >
-                  <p className="text-center py-1">{studentClass}</p>
+                  <p className="text-center py-1">{classStandard}</p>
                 </Card>
               ) : (
                 <Card
@@ -345,32 +360,67 @@ const ProfilePage = () => {
               )}
             </div>
           )}
+          {educationalStatus && (
+            <div className="">
+              <span className="text-xs  lg:ml-[30px]">Educational Status</span>
+              {educationalStatus ? (
+                <Card
+                  sx={{ maxWidth: 290 }}
+                  className="rounded-lg w-full mb-4 border  mx-auto"
+                >
+                  <p className="text-center py-1">{educationalStatus}</p>
+                </Card>
+              ) : (
+                <Card
+                  sx={{ maxWidth: 290 }}
+                  className="rounded-lg w-full mb-4 border  mx-auto"
+                >
+                  <p className="text-center py-1">Not set</p>
+                </Card>
+              )}
+            </div>
+          )}
+          {topicOfExpertise && (
+            <div className="">
+              <span className="text-xs  lg:ml-[30px]">Topic of Expertise</span>
+              {topicOfExpertise ? (
+                <Card
+                  sx={{ maxWidth: 290 }}
+                  className="rounded-lg w-full mb-4 border  mx-auto"
+                >
+                  <p className="text-center py-1">{topicOfExpertise}</p>
+                </Card>
+              ) : (
+                <Card
+                  sx={{ maxWidth: 290 }}
+                  className="rounded-lg w-full mb-4 border  mx-auto"
+                >
+                  <p className="text-center py-1">Not set</p>
+                </Card>
+              )}
+            </div>
+          )}
         </div>
         {!profileData?.id && (
           <div>
-            <h5 className="text-black text-center my-3 font-semibold">
+            <h5 className="text-[#F9A14A] text-center my-3 font-semibold">
               Create profile as
             </h5>
             <div className="w-full flex justify-center items-end">
               <ButtonGroup
                 variant="contained"
-                aria-label="outlined primary button group"
+                aria-label="outlined button group"
               >
                 <Button
                   onClick={() => router.push("/profile/createStudent")}
-                  className="text-black"
+                  className="text-black hover:bg-[#F9A14A]"
                 >
                   Student
                 </Button>
-                <Button
-                  onClick={() => router.push("/profile/createGuardian")}
-                  className="text-black"
-                >
-                  Guardian
-                </Button>
+
                 <Button
                   onClick={() => router.push("/profile/createTeacher")}
-                  className="text-black"
+                  className="text-black hover:bg-[#F9A14A]"
                 >
                   Teacher
                 </Button>

@@ -8,8 +8,10 @@ import { useCreateTeacherMutation } from "@/redux/api/profileApi";
 import { useAppSelector } from "@/redux/hooks";
 import { removeUserInfo, storeUserInfo } from "@/services/auth.service";
 import { Card } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type Inputs = {
   contactNo: string;
@@ -18,14 +20,15 @@ type Inputs = {
   class: string;
   institutionName: string;
   designation: string;
-  experienceYear: string;
-  subjectOfExpertise: string;
+  yearOfExperience: string;
+  topicOfExpertise: string;
 };
 
 const CreateTeacherProfile = () => {
   const [createTeacher] = useCreateTeacherMutation();
   const [resetToken] = useResetTokenMutation();
   const [imageUrl, setImageUrl] = useState("");
+  const router = useRouter();
 
   const { userId } = useAppSelector((state) => state.user.user);
 
@@ -33,10 +36,11 @@ const CreateTeacherProfile = () => {
     { Contact: "contactNo" },
     { Gender: "gender" },
     { Address: "presentAddress" },
-    { Institution: "institutionName" },
+    { Institution: "institution" },
     { Designation: "designation" },
     { Degree: "degree" },
-    { YearofExperience: "experienceYear" },
+    { Year_of_Experience: "yearOfExperience" },
+    { Educational_Status: "educationalStatus" },
   ];
   const {
     register,
@@ -52,14 +56,18 @@ const CreateTeacherProfile = () => {
       userId,
       avatar: imageUrl,
       role: "teacher",
-      subjectOfExpertise: [data.subjectOfExpertise],
+      topicOfExpertise: [data.topicOfExpertise],
     });
 
     if (res?.data) {
       const { token } = await resetToken({}).unwrap();
       removeUserInfo(tokenKey);
       if (await token) {
+        toast.success("Information added");
+        router.push("/profile");
         storeUserInfo({ accessToken: token });
+      } else {
+        toast.error("Failed to add information");
       }
     }
 
@@ -78,10 +86,10 @@ const CreateTeacherProfile = () => {
       />
       <Card
         sx={{ minWidth: 290, maxWidth: 750 }}
-        className="rounded-lg w-full border"
+        className="rounded-lg w-full border border-[#F9A14A]"
       >
-        <h3 className="font-bold text-center py-2">
-          Needed student information
+        <h3 className="font-bold text-center py-2 text-[#F9A14A]">
+          Needed mentor information
         </h3>
 
         <form
@@ -113,18 +121,18 @@ const CreateTeacherProfile = () => {
               ))}
               <div className="relative mb-3">
                 <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute uppercase">
-                  Subject of expertise
+                  Topic of expertise
                 </p>
                 <input
-                  {...register("subjectOfExpertise", {
+                  {...register("topicOfExpertise", {
                     required: true,
                   })}
                   type="text"
                   className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
                 />
-                {errors.subjectOfExpertise && (
+                {errors.topicOfExpertise && (
                   <span className="text-red-600">
-                    Subject of expertise is required
+                    Topic of expertise is required
                   </span>
                 )}
               </div>
@@ -135,8 +143,8 @@ const CreateTeacherProfile = () => {
             <div className="relative">
               <input
                 type="submit"
-                className="w-full inline-block pt-3 pr-5 pb-3 pl-5 text-xl font-medium text-center text-white bg-[#00DFBF]
-                  rounded-lg transition duration-200 hover:bg-[#2B444E] ease"
+                className="w-full inline-block pt-3 pr-5 pb-3 pl-5 text-xl font-medium text-center text-black bg-[#F9A14A]
+                  rounded-lg transition duration-200 hover:bg-white hover:border hover:border-[#4EAC95] ease"
               />
             </div>
           </div>

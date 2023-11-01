@@ -27,25 +27,25 @@ export type IGenericErrorMessage = {
 };
 
 export enum ServiceType {
-  "onsite",
-  "remote",
+  "online",
+  "offline",
 }
 
 export type IService = {
   id: string;
   userId: string;
   thumbnail: string;
-  name: string;
+  title: string;
   location: string;
   authorName: string;
   authorEmail: string;
   authorImage: string;
   description: string;
   category: string;
-  price: number;
-  duration: string;
+  fee: number;
   badge: string[];
-  serviceType: string;
+  type: string;
+  status: string;
   createdAt: string;
   updatedAt: string;
 };

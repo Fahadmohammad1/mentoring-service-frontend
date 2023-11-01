@@ -17,10 +17,9 @@ type Inputs = {
   authorName?: string;
   authorEmail?: string;
   category?: string;
-  duration?: string;
   description?: string;
-  price?: number;
-  serviceType: ServiceType;
+  fee?: number;
+  type: ServiceType;
 };
 
 const CreateService = () => {
@@ -46,17 +45,20 @@ const CreateService = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const { price } = data;
+    const { fee, type } = data;
     const res = await addService({
       ...data,
       userId,
       thumbnail: imageUrl,
-      price: Number(price),
+      fee: Number(fee),
+      type,
     }).unwrap();
 
-    if (res.id) {
+    if (res?.id) {
       toast.success("Service added");
       router.push("/");
+    } else {
+      toast.error("failed to add service");
     }
 
     reset();
@@ -96,14 +98,14 @@ const CreateService = () => {
                 Fee
               </p>
               <input
-                {...register("price", {
+                {...register("fee", {
                   required: true,
                 })}
                 type="number"
                 placeholder="$20 or $0"
                 className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
               />
-              {errors.price && (
+              {errors.fee && (
                 <span className="text-red-600">Price is required</span>
               )}
             </div>
@@ -112,14 +114,14 @@ const CreateService = () => {
                 ServiceType
               </p>
               <input
-                {...register("serviceType", {
+                {...register("type", {
                   required: true,
                 })}
                 type="text"
                 placeholder="online or offline"
                 className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
               />
-              {errors.serviceType && (
+              {errors.type && (
                 <span className="text-red-600">Service type is required</span>
               )}
             </div>

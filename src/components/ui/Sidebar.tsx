@@ -110,7 +110,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
       <CssBaseline />
       <AppBar
         position="fixed"
-        className="bg-[#fffdf4] shadow-none border-b"
+        className="bg-white shadow-none border-b"
         open={open}
       >
         <Toolbar>

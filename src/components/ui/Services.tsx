@@ -15,11 +15,13 @@ const Services = () => {
       <h1 className="text-3xl text-center text-[#151D34] font-bold mt-3 mb-7">
         Available events and sessions
       </h1>
-      <div className="lg:grid grid-cols-2 gap-5">
+      <div className="lg:grid grid-cols-2 gap-x-5 gap-y-10">
         {data?.data &&
-          data.data.map((service: IService) => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
+          data.data
+            .slice(0, 4)
+            .map((service: IService) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
       </div>
     </section>
   );

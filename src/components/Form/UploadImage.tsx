@@ -71,9 +71,9 @@ const UploadImage = ({ setImageUrl }: any) => {
           <label htmlFor="image-upload-input">
             <Button
               variant="contained"
-              color="primary"
+              className="bg-gray-400 text-black hover:bg-white hover:border hover:border-[#4EAC95]"
               component="span"
-              startIcon={loading ? <CloudUploadIcon /> : null}
+              startIcon={<CloudUploadIcon />}
               disabled={loading}
             >
               {loading ? "Uploading..." : "Upload Image"}
