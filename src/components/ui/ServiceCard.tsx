@@ -28,7 +28,7 @@ const ServiceCard = ({ service }: { service: IService }) => {
       badgeContent={service?.type}
       max={1}
     >
-      <div className="p-4 items-center justify-center lg:w-[600px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-2xl border hover:border-[#4EAC95] mx-auto">
+      <div className="p-4 items-center justify-center lg:w-[590px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-2xl border hover:border-[#4EAC95] mx-auto">
         <Image
           onClick={() => handleDetailsClick(service?.id)}
           width={100}

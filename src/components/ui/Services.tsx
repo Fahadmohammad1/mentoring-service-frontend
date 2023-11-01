@@ -11,9 +11,9 @@ const Services = () => {
     return <Loading />;
   }
   return (
-    <section className="container mx-auto">
-      <h1 className="text-3xl text-center text-[#151D34] font-bold mt-3 mb-7">
-        Available events and sessions
+    <section className="container mx-auto h-screen">
+      <h1 className="text-3xl text-center text-black font-bold mt-3 mb-10">
+        Services you can book
       </h1>
       <div className="lg:grid grid-cols-2 gap-x-5 gap-y-10">
         {data?.data &&

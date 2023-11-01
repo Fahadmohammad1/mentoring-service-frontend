@@ -87,7 +87,7 @@ const Navbar = () => {
   return (
     <AppBar
       style={{
-        background: isScrolled ? "#4EAC95" : "#fff",
+        background: isScrolled ? "#fff" : "#fff",
         transition: "background-color 0.3s ease",
       }}
       position="fixed"
