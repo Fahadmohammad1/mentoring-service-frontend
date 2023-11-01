@@ -1,3 +1,4 @@
+import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
 export const serviceApi = baseApi.injectEndpoints({
@@ -8,12 +9,14 @@ export const serviceApi = baseApi.injectEndpoints({
         method: "POST",
         data: serviceData,
       }),
+      invalidatesTags: [tagTypes.service],
     }),
     allService: build.query({
       query: () => ({
         url: "/service",
         method: "GET",
       }),
+      providesTags: [tagTypes.service],
     }),
     singleService: build.query({
       query: (id) => ({

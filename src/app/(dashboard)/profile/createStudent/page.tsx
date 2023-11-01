@@ -8,6 +8,7 @@ import { useCreateStudentMutation } from "@/redux/api/profileApi";
 import { useAppSelector } from "@/redux/hooks";
 import { removeUserInfo, storeUserInfo } from "@/services/auth.service";
 import { Card } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -24,6 +25,7 @@ const CreateStudentProfile = () => {
   const [createStudent] = useCreateStudentMutation();
   const [resetToken] = useResetTokenMutation();
   const [imageUrl, setImageUrl] = useState("");
+  const router = useRouter();
 
   const { userId } = useAppSelector((state) => state.user.user);
 
@@ -56,6 +58,7 @@ const CreateStudentProfile = () => {
       removeUserInfo(tokenKey);
       if (await token) {
         storeUserInfo({ accessToken: token });
+        router.push("/profile");
       }
     }
     reset();
