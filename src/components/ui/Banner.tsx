@@ -13,7 +13,7 @@ const Banner = () => {
             Your personalized way to
           </span>
           <h1 className="lg:text-7xl text-3xl font-bold tracking-wide">
-            Learn from best teacher&apos;s around the world
+            Learn from best mentor&apos;s around the world
           </h1>
           <Button
             variant="outlined"
@@ -26,7 +26,7 @@ const Banner = () => {
             <p>
               <span className="text-3xl text-[#F9A14A]">110+</span>
               <br />
-              Teachers
+              Mentors
             </p>
             <div className="border-2"></div>
             <p>
