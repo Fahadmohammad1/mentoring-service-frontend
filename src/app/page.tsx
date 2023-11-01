@@ -1,5 +1,5 @@
 import Banner from "@/components/ui/Banner";
-import ServiceCard from "@/components/ui/ServiceCard";
+import Overview from "@/components/ui/Overview";
 import Services from "@/components/ui/Services";
 import TopCategories from "@/components/ui/TopCategories";
 import UpcomingServices from "@/components/ui/UpcomingServices";
@@ -12,6 +12,7 @@ const HomePage = () => {
       <Services />
       <TopCategories />
       <UpcomingServices />
+      <Overview />
     </>
   );
 };
