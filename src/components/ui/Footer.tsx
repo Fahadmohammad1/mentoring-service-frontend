@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="border-2 border-[#4EAC95]">
+    <footer className="border-t-2 border-[#4EAC95]">
       <div className="container px-6 py-12 mx-auto">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
           <div className="sm:col-span-2">
@@ -30,15 +30,9 @@ const Footer = () => {
             </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
-              <p className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                Home
-              </p>
-              <p className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                Who We Are
-              </p>
-              <p className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                Our Philosophy
-              </p>
+              <p className="text-black">Home</p>
+              <p className="text-black">Who We Are</p>
+              <p className="text-black">Our Philosophy</p>
             </div>
           </div>
 
@@ -48,15 +42,9 @@ const Footer = () => {
             </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
-              <p className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                Retail & E-Commerce
-              </p>
-              <p className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                Information Technology
-              </p>
-              <p className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                Finance & Insurance
-              </p>
+              <p className="text-black">Retail & E-Commerce</p>
+              <p className="text-black">Information Technology</p>
+              <p className="text-black">Finance & Insurance</p>
             </div>
           </div>
         </div>
