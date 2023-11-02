@@ -65,7 +65,7 @@ const CreateService = () => {
   };
 
   return (
-    <section className="mt-20 mx-auto">
+    <section className="mt-20 mx-auto mb-5">
       <h1 className="text-3xl font-bold text-[#F9A14A] text-center py-5">
         Describe what you want to teach
       </h1>

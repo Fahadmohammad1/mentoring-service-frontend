@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-const BookmarkModal = ({ status }) => {
+const BookmarkModal = ({ status }: { status: string }) => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => setOpen(false);

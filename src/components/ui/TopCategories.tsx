@@ -60,7 +60,7 @@ const TopCategories = () => {
             {categories.map((category) => (
               <Card
                 key={category.id}
-                className="shadow-xl border"
+                className="shadow-md border rounded-lg"
                 sx={{ minWidth: 250 }}
               >
                 <CardContent className="flex items-center justify-center gap-x-5">
