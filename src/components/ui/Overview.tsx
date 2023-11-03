@@ -28,8 +28,8 @@ const Overview = () => {
     },
   ];
   return (
-    <section className="h-screen">
-      <h1 className="text-3xl text-center text-black font-bold mb-10 mt-7">
+    <section className="my-24">
+      <h1 className="text-3xl text-center text-black font-bold mb-10">
         How we help learners
       </h1>
       <div className="flex gap-x-10 justify-center items-center">

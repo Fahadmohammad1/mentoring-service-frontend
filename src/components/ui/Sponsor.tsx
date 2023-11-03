@@ -45,14 +45,14 @@ const Sponsor = () => {
     },
   ];
   return (
-    <section className="h-screen">
-      <h1 className="text-3xl text-center text-black font-bold mb-10 mt-14">
+    <section className="my-24">
+      <h1 className="text-3xl text-center text-black font-bold mb-10">
         Sponsors
       </h1>
       <div className="lg:grid grid-cols-4 gap-y-10">
         {sponsors.map((s) => (
           <Image
-            className="mx-auto"
+            className="mx-auto my-auto"
             key={s.id}
             src={s.image}
             width={200}

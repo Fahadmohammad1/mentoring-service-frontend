@@ -17,9 +17,9 @@ const Banner = () => {
           </h1>
           <Button
             variant="outlined"
-            className="flex items-center w-1/3 gap-3 mt-7 bg-[#F9A14A] hover:border-1 text-black hover:border-[#4EAC95]"
+            className="flex items-center w-1/4 gap-3 mt-7 bg-[#F9A14A] hover:border-1 text-black hover:border-[#4EAC95]"
           >
-            Book Service
+            Book
             <SiGooglemeet />
           </Button>
           <div className="flex mt-10 gap-10">

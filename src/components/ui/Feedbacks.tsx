@@ -24,7 +24,7 @@ const Feedbacks = () => {
     },
   ];
   return (
-    <section className="h-screen w-10/12 mx-auto">
+    <section className="w-10/12 mx-auto my-24">
       <h1 className="text-3xl text-center text-black font-bold mb-10 mt-7">
         Learner&apos;s feedbacks
       </h1>

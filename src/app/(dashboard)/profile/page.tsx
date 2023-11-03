@@ -81,10 +81,8 @@ const ProfilePage = () => {
     ? profileData.topicOfExpertise.toString()
     : null;
 
-  console.log(topicOfExpertise);
-
   return (
-    <section className="h-full lg:flex gap-5">
+    <section className="h-fit lg:flex gap-5 mb-10">
       <Card
         sx={{ maxWidth: 290 }}
         className="rounded-lg lg:mb-0 mb-7 border border-[#F9A14A]"

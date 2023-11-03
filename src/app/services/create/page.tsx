@@ -27,6 +27,7 @@ const CreateService = () => {
   const { userId } = useAppSelector((state) => state.user.user);
   const [addService] = useAddServiceMutation();
   const router = useRouter();
+  const { user } = useAppSelector((state) => state.user);
 
   const fields = [
     { Title: "title" },
@@ -43,6 +44,11 @@ const CreateService = () => {
     formState: { errors, touchedFields },
     reset,
   } = useForm<Inputs>();
+
+  if (user.role !== "teacher") {
+    toast.error("Please create teacher profile");
+    router.push("/profile");
+  }
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { fee, type } = data;

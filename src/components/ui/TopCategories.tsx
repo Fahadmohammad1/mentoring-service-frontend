@@ -50,7 +50,7 @@ const TopCategories = () => {
     },
   ];
   return (
-    <section className="">
+    <section className="my-24">
       <div className="flex items-center">
         <div>
           <Image src={tutorial} width={350} height={400} alt="tutorial" />

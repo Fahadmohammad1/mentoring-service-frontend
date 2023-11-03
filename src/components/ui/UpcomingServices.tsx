@@ -13,8 +13,8 @@ const UpcomingServices = () => {
     return <Loading />;
   }
   return (
-    <section className="h-screen">
-      <h1 className="text-3xl text-center text-black font-bold mb-10 mt-14">
+    <section className="mt-24">
+      <h1 className="text-3xl text-center text-black font-bold mb-10">
         Upcoming Events
       </h1>
       <div className="lg:grid grid-cols-2 gap-x-5 gap-y-10">
