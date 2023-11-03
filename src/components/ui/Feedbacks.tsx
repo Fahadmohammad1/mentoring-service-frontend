@@ -25,15 +25,15 @@ const Feedbacks = () => {
   ];
   return (
     <section className="w-10/12 mx-auto my-24">
-      <h1 className="text-3xl text-center text-black font-bold mb-10 mt-7">
+      <h1 className="lg:text-3xl text-xl text-center text-black font-bold mb-10 lg:mt-7">
         Learner&apos;s feedbacks
       </h1>
       <div className="lg:grid grid-cols-3 gap-5">
         {reviews.map((review) => (
-          <div key={review.id} className="">
+          <div key={review.id} className="mb-10 lg:mb-0">
             <div className="flex gap-x-10 px-5">
               <Image
-                className="-mt-3"
+                className="lg:-mt-3"
                 src={review.image}
                 width={60}
                 height={60}

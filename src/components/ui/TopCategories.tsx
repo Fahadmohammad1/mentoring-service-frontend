@@ -50,25 +50,30 @@ const TopCategories = () => {
     },
   ];
   return (
-    <section className="my-24">
-      <div className="flex items-center">
-        <div>
+    <section className="lg:my-24 my-10 px-5 lg:px-0">
+      <h1 className="lg:text-3xl text-xl text-center text-black font-bold mb-10">
+        Featured Categories
+      </h1>
+      <div className="xl:flex items-center">
+        <div className="lg:flex justify-center">
           <Image src={tutorial} width={350} height={400} alt="tutorial" />
         </div>
-        <div className="">
+        <div className="mt-10 lg:mt-10 lg:px-5 xl:px-0">
           <div className="lg:grid grid-cols-3 gap-y-10 gap-x-5">
             {categories.map((category) => (
               <Card
                 key={category.id}
-                className="shadow-md border rounded-lg"
-                sx={{ minWidth: 250 }}
+                className="shadow-md border rounded-lg mb-7 lg:mb-0"
+                sx={{ minWidth: 180 }}
               >
                 <CardContent className="flex items-center justify-center gap-x-5">
                   <span className="text-3xl text-[#F9A14A]">
                     {category.icon}
                   </span>
                   <div>
-                    <p className="font-bold text-xl">{category.name}</p>
+                    <p className="font-bold xl:text-xl lg:text-base text-lg">
+                      {category.name}
+                    </p>
                     <p>{category.lessons}</p>
                   </div>
                   <span>

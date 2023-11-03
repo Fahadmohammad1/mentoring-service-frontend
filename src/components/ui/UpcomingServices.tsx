@@ -14,10 +14,10 @@ const UpcomingServices = () => {
   }
   return (
     <section className="mt-24">
-      <h1 className="text-3xl text-center text-black font-bold mb-10">
+      <h1 className="lg:text-3xl text-xl text-center text-black font-bold mb-10">
         Upcoming Events
       </h1>
-      <div className="lg:grid grid-cols-2 gap-x-5 gap-y-10">
+      <div className="lg:grid grid-cols-2 gap-x-5 gap-y-10 lg:px-5 xl:px-0">
         {data?.data &&
           data.data
             .slice(0, 2)
@@ -25,10 +25,12 @@ const UpcomingServices = () => {
               <ServiceCard key={service.id} service={service} />
             ))}
       </div>
-      <div className="p-4">
+      <div className="xl:p-4 lg:p-5 p-4">
         <Card className="shadow-md rounded-xl border mt-5">
           <CardContent className="">
-            <h1 className="text-lg font-bold">About Upcoming events</h1>
+            <h1 className="lg:text-lg text-base pb-2 font-bold">
+              About Upcoming events
+            </h1>
             <p className="text-justify">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo
               beatae ut sequi velit fuga. Dolor inventore aut natus optio soluta

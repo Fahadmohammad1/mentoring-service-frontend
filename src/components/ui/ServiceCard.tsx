@@ -50,7 +50,7 @@ const ServiceCard = ({ service }: { service: IService }) => {
           loading="lazy"
           src={service.thumbnail}
         />
-        <div className="sm:w-8/12 pl-0 p-5 lg:pt-0 pt-6">
+        <div className="sm:w-8/12 pl-0 p-5 pt-6">
           <div className="space-y-2">
             <div className="space-y-4">
               <h4 className="text-md font-semibold text-black">

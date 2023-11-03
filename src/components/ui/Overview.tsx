@@ -29,7 +29,7 @@ const Overview = () => {
   ];
   return (
     <section className="my-24">
-      <h1 className="text-3xl text-center text-black font-bold mb-10">
+      <h1 className="lg:text-3xl text-xl text-center text-black font-bold mb-10">
         How we help learners
       </h1>
       <div className="lg:flex gap-x-10 justify-center items-center">
