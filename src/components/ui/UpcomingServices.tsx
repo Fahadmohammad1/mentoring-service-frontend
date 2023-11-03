@@ -26,7 +26,7 @@ const UpcomingServices = () => {
             ))}
       </div>
       <div className="p-4">
-        <Card className="shadow-md rounded-xl border">
+        <Card className="shadow-md rounded-xl border mt-5">
           <CardContent className="">
             <h1 className="text-lg font-bold">About Upcoming events</h1>
             <p className="text-justify">

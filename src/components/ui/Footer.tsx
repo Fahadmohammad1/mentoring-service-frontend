@@ -93,24 +93,12 @@ const Footer = () => {
               height="30"
               alt="gt"
             />
-            <img
-              src="https://www.svgrepo.com/show/22037/path.svg"
-              width="30"
-              height="30"
-              alt="pn"
-            />
+
             <img
               src="https://www.svgrepo.com/show/28145/linkedin.svg"
               width="30"
               height="30"
               alt="in"
-            />
-            <img
-              src="https://www.svgrepo.com/show/22048/dribbble.svg"
-              className=""
-              width="30"
-              height="30"
-              alt="db"
             />
           </div>
         </div>

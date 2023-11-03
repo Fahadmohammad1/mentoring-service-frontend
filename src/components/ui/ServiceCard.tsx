@@ -1,11 +1,22 @@
 import { useAddToBookmarkMutation } from "@/redux/api/bookmarkApi";
 import { IService } from "@/types";
-import { Badge, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
+import Badge, { BadgeProps } from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: 45,
+    top: 0,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}));
 
 const ServiceCard = ({ service }: { service: IService }) => {
   const router = useRouter();
@@ -23,22 +34,23 @@ const ServiceCard = ({ service }: { service: IService }) => {
   };
 
   return (
-    <Badge
+    <StyledBadge
       color={service?.type === "offline" ? "primary" : "warning"}
+      className="px-4 lg:px-0"
       badgeContent={service?.type}
       max={1}
     >
-      <div className="p-4 items-center justify-center lg:w-[590px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-md border hover:border-[#4EAC95] mx-auto">
+      <div className="p-4 mb-10 lg:mb-0 items-center justify-center lg:w-[590px] rounded-xl group sm:flex space-x-6  bg-white bg-opacity-50 shadow-md border hover:border-[#4EAC95] mx-auto">
         <Image
           onClick={() => handleDetailsClick(service?.id)}
           width={100}
           height={100}
-          className="mx-auto w-4/12 h-40 rounded-lg"
+          className="mx-auto lg:w-4/12 h-40 w-full rounded-lg"
           alt="art cover"
           loading="lazy"
           src={service.thumbnail}
         />
-        <div className="sm:w-8/12 pl-0 p-5 pt-0">
+        <div className="sm:w-8/12 pl-0 p-5 lg:pt-0 pt-6">
           <div className="space-y-2">
             <div className="space-y-4">
               <h4 className="text-md font-semibold text-black">
@@ -82,7 +94,7 @@ const ServiceCard = ({ service }: { service: IService }) => {
           </div>
         </div>
       </div>
-    </Badge>
+    </StyledBadge>
   );
 };
 

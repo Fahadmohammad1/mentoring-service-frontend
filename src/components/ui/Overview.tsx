@@ -32,7 +32,7 @@ const Overview = () => {
       <h1 className="text-3xl text-center text-black font-bold mb-10">
         How we help learners
       </h1>
-      <div className="flex gap-x-10 justify-center items-center">
+      <div className="lg:flex gap-x-10 justify-center items-center">
         {overview.map((ov) => (
           <OverviewCard key={ov.id} overview={ov} />
         ))}

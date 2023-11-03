@@ -6,9 +6,9 @@ import { SiGooglemeet } from "react-icons/si";
 
 const Banner = () => {
   return (
-    <section className=" dark:text-black h-screen mt-10">
-      <div className="lg:grid grid-cols-12 h-full">
-        <div className="mx-auto flex flex-col text-start justify-center  h-full col-span-6 pl-3">
+    <section className=" dark:text-black h-screen lg:mt-10 mt-20">
+      <div className="lg:grid grid-cols-12 lg:h-full flex flex-col-reverse">
+        <div className="mx-auto flex flex-col lg:text-start items-center lg:items-start text-center justify-center h-full col-span-6 pl-3">
           <span className="text-start font-bold text-[#F9A14A] mb-3">
             Your personalized way to
           </span>
@@ -17,7 +17,7 @@ const Banner = () => {
           </h1>
           <Button
             variant="outlined"
-            className="flex items-center w-1/4 gap-3 mt-7 bg-[#F9A14A] hover:border-1 text-black hover:border-[#4EAC95]"
+            className="flex items-center lg:w-1/4 w-2/4 gap-3 mt-7 bg-[#F9A14A] hover:border-1 text-black hover:border-[#4EAC95]"
           >
             Book
             <SiGooglemeet />
