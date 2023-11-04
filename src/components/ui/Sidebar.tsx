@@ -22,6 +22,9 @@ import MailIcon from "@mui/icons-material/Mail";
 import HomeIcon from "@mui/icons-material/Home";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import Link from "next/link";
+import { BiSolidUserAccount } from "react-icons/bi";
+import { usePathname } from "next/navigation";
+import { GrServices } from "react-icons/gr";
 
 const drawerWidth = 240;
 
@@ -96,6 +99,8 @@ const Drawer = styled(MuiDrawer, {
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const pathname = usePathname();
+  console.log(pathname);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -148,7 +153,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Profile", "Starred", "Send email"].map((text, index) => (
+          {["Profile", "My Services", "Send email"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -164,8 +169,23 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                     justifyContent: "center",
                   }}
                 >
-                  {index === 0 && <HomeIcon />}
-                  {index === 1 && <MailIcon />}
+                  {index === 0 && (
+                    <Link href="/profile">
+                      {" "}
+                      <BiSolidUserAccount className="text-2xl" />
+                    </Link>
+                  )}
+                  {index === 1 && (
+                    <Link href="/profile/my-services">
+                      <GrServices
+                        className={`text-2xl ${
+                          pathname === "/profile/my-services"
+                            ? "bg-rose-600"
+                            : ""
+                        } rounded-r-full`}
+                      />
+                    </Link>
+                  )}
                   {index === 2 && <DeleteOutlinedIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />

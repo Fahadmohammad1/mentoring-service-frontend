@@ -23,6 +23,7 @@ import { getFromLocalStorage } from "@/utils/local-storage";
 import { setUser } from "@/redux/features/user/userSlice";
 import { IUser } from "@/types";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
+import { toggleBookmarkModal } from "@/redux/features/bookmark/bookmarkSlice";
 
 const pages = ["Services", "Become mentor", "Blog"];
 const settings = ["Profile", "Login", "Logout"];
@@ -30,6 +31,7 @@ const settings = ["Profile", "Login", "Logout"];
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
   const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null);
+  const [open, setOpen] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -57,8 +59,6 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
-  // const handleOpenModal = () => setOpen(true);
-
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const Navbar = () => {
     };
   }, []);
 
-  const { user } = useAppSelector((state) => state.user);
+  const { user }: { user: IUser } = useAppSelector((state) => state.user);
 
   const handleLogout = () => {
     removeUserInfo(tokenKey);
@@ -208,7 +208,10 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <div className="flex items-center">
               <Badge badgeContent={1} color="error">
-                <span>
+                <span
+                  className="cursor-pointer"
+                  onClick={() => dispatch(toggleBookmarkModal())}
+                >
                   <BsFillBookmarkCheckFill className="text-xl"></BsFillBookmarkCheckFill>
                 </span>
               </Badge>

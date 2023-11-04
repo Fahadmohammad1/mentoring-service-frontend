@@ -1,5 +1,7 @@
 import Banner from "@/components/ui/Banner";
+import BookmarkModal from "@/components/ui/BookmarkModal";
 import Feedbacks from "@/components/ui/Feedbacks";
+import Footer from "@/components/ui/Footer";
 import Overview from "@/components/ui/Overview";
 import Services from "@/components/ui/Services";
 import Sponsor from "@/components/ui/Sponsor";
@@ -11,12 +13,14 @@ const HomePage = () => {
   return (
     <>
       <Banner />
+      <BookmarkModal />
       <Services />
       <TopCategories />
       <UpcomingServices />
       <Overview />
       <Feedbacks />
       <Sponsor />
+      <Footer />
     </>
   );
 };

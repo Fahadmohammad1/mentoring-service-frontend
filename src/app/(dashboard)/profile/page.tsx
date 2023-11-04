@@ -220,7 +220,7 @@ const ProfilePage = () => {
           )}
           {contactNo && (
             <div className="">
-              <span className="text- lg:ml-[30px]">Contact</span>
+              <span className="text-xs lg:ml-[30px]">Contact</span>
               {contactNo ? (
                 <Card
                   sx={{ maxWidth: 290 }}

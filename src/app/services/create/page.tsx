@@ -5,7 +5,7 @@ import { useAddServiceMutation } from "@/redux/api/serviceApi";
 import { useAppSelector } from "@/redux/hooks";
 import { ServiceType } from "@/types";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import professor from "../../../assets/Professor.gif";
@@ -45,10 +45,12 @@ const CreateService = () => {
     reset,
   } = useForm<Inputs>();
 
-  if (user.role !== "teacher") {
-    toast.error("Please create teacher profile");
-    router.push("/profile");
-  }
+  useEffect(() => {
+    if (user.role !== "teacher") {
+      toast.error("Please create teacher profile");
+      router.push("/profile");
+    }
+  }, [router, user.role]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { fee, type } = data;
