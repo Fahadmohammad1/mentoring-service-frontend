@@ -18,14 +18,6 @@ export const profileApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
-    createGuardian: build.mutation({
-      query: (guardianData) => ({
-        url: "/profile/create-guardianProfile",
-        method: "POST",
-        data: guardianData,
-      }),
-      invalidatesTags: [tagTypes.user],
-    }),
     createTeacher: build.mutation({
       query: (teacherData) => ({
         url: "/profile/create-teacherProfile",
@@ -40,6 +32,5 @@ export const profileApi = baseApi.injectEndpoints({
 export const {
   useMyProfileQuery,
   useCreateStudentMutation,
-  useCreateGuardianMutation,
   useCreateTeacherMutation,
 } = profileApi;

@@ -49,3 +49,28 @@ export type IService = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type IBookmark = {
+  id: string;
+  serviceId: string;
+  userId: string;
+  quantity: number;
+  service: {
+    id: string;
+    userId: string;
+    thumbnail: string;
+    title: string;
+    location: string;
+    authorName: string;
+    authorEmail: string;
+    authorImage: string;
+    description: string;
+    category: string;
+    fee: number;
+    badge: string[];
+    type: string;
+    status: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+};

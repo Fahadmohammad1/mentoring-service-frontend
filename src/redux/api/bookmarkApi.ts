@@ -5,7 +5,7 @@ export const saveApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     addToBookmark: build.mutation({
       query: (serviceData) => ({
-        url: "/saveForLater/add",
+        url: "/bookmark/add",
         method: "POST",
         data: serviceData,
       }),
@@ -13,7 +13,7 @@ export const saveApi = baseApi.injectEndpoints({
     }),
     allBookmarkItem: build.query({
       query: () => ({
-        url: "/service",
+        url: "/bookmark",
         method: "GET",
       }),
       providesTags: [tagTypes.bookmark],

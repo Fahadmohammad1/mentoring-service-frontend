@@ -26,6 +26,10 @@ const ServiceCard = ({ service }: { service: IService }) => {
     const res = await addToSaveLater({ serviceId, quantity: 1 }).unwrap();
     if (res?.id) {
       toast.success("Saved");
+    } else if (res === undefined) {
+      toast.error("Already added");
+    } else {
+      toast.error("failed");
     }
   };
 

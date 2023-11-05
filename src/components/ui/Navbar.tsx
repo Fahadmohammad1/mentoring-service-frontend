@@ -24,6 +24,8 @@ import { setUser } from "@/redux/features/user/userSlice";
 import { IUser } from "@/types";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import { toggleBookmarkModal } from "@/redux/features/bookmark/bookmarkSlice";
+import { useAllBookmarkItemQuery } from "@/redux/api/bookmarkApi";
+import Loading from "./Loading";
 
 const pages = ["Services", "Become mentor", "Blog"];
 const settings = ["Profile", "Login", "Logout"];
@@ -31,11 +33,12 @@ const settings = ["Profile", "Login", "Logout"];
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
   const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null);
-  const [open, setOpen] = useState(false);
 
   const dispatch = useAppDispatch();
 
   const userData = getFromLocalStorage(tokenKey);
+
+  const { data, isLoading } = useAllBookmarkItemQuery({});
 
   if (userData) {
     const { userId, email, role } = getUserInfo() as IUser;
@@ -83,6 +86,10 @@ const Navbar = () => {
     removeUserInfo(tokenKey);
     dispatch(setUser({ userId: null, email: null, role: null }));
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <AppBar
