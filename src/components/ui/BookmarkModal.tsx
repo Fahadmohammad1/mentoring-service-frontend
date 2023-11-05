@@ -20,6 +20,7 @@ import Image from "next/image";
 const BookmarkModal = () => {
   const dispatch = useDispatch();
   const { data, isLoading } = useAllBookmarkItemQuery({});
+  console.log(data);
 
   const theme = useTheme();
   const { open } = useAppSelector((state) => state.bookmark);
@@ -42,7 +43,7 @@ const BookmarkModal = () => {
       aria-labelledby="responsive-dialog-title"
     >
       <DialogTitle id="responsive-dialog-title">{"Saved Services"}</DialogTitle>
-      {data.map((service: IBookmark) => (
+      {data?.map((service: IBookmark) => (
         <DialogContent key={service.id}>
           <Image
             className="w-50 mx-auto mb-5"

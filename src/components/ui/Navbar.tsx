@@ -214,7 +214,10 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <div className="flex items-center">
-              <Badge badgeContent={1} color="error">
+              <Badge
+                badgeContent={data?.length ? data.length : "0"}
+                color="error"
+              >
                 <span
                   className="cursor-pointer"
                   onClick={() => dispatch(toggleBookmarkModal())}
