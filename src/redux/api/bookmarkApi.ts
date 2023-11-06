@@ -18,7 +18,18 @@ export const saveApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.bookmark],
     }),
+    deleteBookmark: build.mutation({
+      query: (id) => ({
+        url: `/bookmark/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.bookmark],
+    }),
   }),
 });
 
-export const { useAddToBookmarkMutation, useAllBookmarkItemQuery } = saveApi;
+export const {
+  useAddToBookmarkMutation,
+  useAllBookmarkItemQuery,
+  useDeleteBookmarkMutation,
+} = saveApi;

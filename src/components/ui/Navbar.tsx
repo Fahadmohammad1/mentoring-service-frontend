@@ -214,17 +214,19 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <div className="flex items-center">
-              <Badge
-                badgeContent={data?.length ? data.length : "0"}
-                color="error"
-              >
-                <span
-                  className="cursor-pointer"
-                  onClick={() => dispatch(toggleBookmarkModal())}
+              {userData && (
+                <Badge
+                  badgeContent={data?.length ? data.length : "0"}
+                  color="error"
                 >
-                  <BsFillBookmarkCheckFill className="text-xl"></BsFillBookmarkCheckFill>
-                </span>
-              </Badge>
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => dispatch(toggleBookmarkModal())}
+                  >
+                    <BsFillBookmarkCheckFill className="text-xl"></BsFillBookmarkCheckFill>
+                  </span>
+                </Badge>
+              )}
               <IconButton
                 className="mr-3"
                 size="large"

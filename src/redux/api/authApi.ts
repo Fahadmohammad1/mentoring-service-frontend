@@ -16,6 +16,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         data: loginData,
       }),
+      invalidatesTags: [tagTypes.bookmark],
     }),
     resetToken: build.mutation({
       query: () => ({

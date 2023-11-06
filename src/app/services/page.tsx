@@ -32,8 +32,6 @@ const AllServices = () => {
   }
 
   const { data, isLoading } = useAllServiceQuery({ ...query });
-  console.log(search);
-  console.log(data);
 
   const onPaginationChange = (page: number, pageSize: number) => {
     console.log("Page:", page, "PageSize:", pageSize);

@@ -18,13 +18,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import HomeIcon from "@mui/icons-material/Home";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import Link from "next/link";
 import { BiSolidUserAccount } from "react-icons/bi";
 import { usePathname } from "next/navigation";
-import { GrServices } from "react-icons/gr";
+import { MdVideoSettings } from "react-icons/md";
+import { useAppSelector } from "@/redux/hooks";
 
 const drawerWidth = 240;
 
@@ -100,7 +99,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
-  console.log(pathname);
+  const { user } = useAppSelector((state) => state.user);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -155,41 +154,64 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         <List>
           {["Profile", "My Services", "Send email"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
+              {index === 0 && (
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
                   }}
                 >
-                  {index === 0 && (
-                    <Link href="/profile">
-                      {" "}
-                      <BiSolidUserAccount className="text-2xl" />
-                    </Link>
-                  )}
-                  {index === 1 && (
-                    <Link href="/profile/my-services">
-                      <GrServices
-                        className={`text-2xl ${
-                          pathname === "/profile/my-services"
-                            ? "bg-rose-600"
-                            : ""
-                        } rounded-r-full`}
-                      />
-                    </Link>
-                  )}
-                  {index === 2 && <DeleteOutlinedIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {index === 0 && (
+                      <Link href="/profile">
+                        <BiSolidUserAccount
+                          className={`text-2xl ${
+                            pathname === "/profile" ? "text-rose-600" : ""
+                          } rounded-r-full`}
+                        />
+                      </Link>
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              )}
+              {index === 1 && user.role === "teacher" && (
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {index === 1 && (
+                      <Link href="/profile/my-services">
+                        <MdVideoSettings
+                          className={`text-2xl ${
+                            pathname === "/profile/my-services"
+                              ? "text-rose-600"
+                              : ""
+                          } rounded-r-full`}
+                        />
+                      </Link>
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              )}
             </ListItem>
           ))}
         </List>
@@ -213,7 +235,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                         justifyContent: "center",
                       }}
                     >
-                      <HomeIcon className="text-rose-600" />
+                      <HomeIcon />
                     </ListItemIcon>
                     <ListItemText
                       primary={text}
