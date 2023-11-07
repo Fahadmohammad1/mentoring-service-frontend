@@ -173,7 +173,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                       <Link href="/profile">
                         <BiSolidUserAccount
                           className={`text-2xl ${
-                            pathname === "/profile" ? "text-rose-600" : ""
+                            pathname === "/profile" ? "text-[#F9A14A]" : ""
                           } rounded-r-full`}
                         />
                       </Link>
@@ -202,7 +202,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                         <MdVideoSettings
                           className={`text-2xl ${
                             pathname === "/profile/my-services"
-                              ? "text-rose-600"
+                              ? "text-[#F9A14A]"
                               : ""
                           } rounded-r-full`}
                         />

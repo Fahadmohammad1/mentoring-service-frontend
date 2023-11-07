@@ -24,6 +24,7 @@ import { MdDelete } from "react-icons/md";
 const BookmarkModal = () => {
   const dispatch = useDispatch();
   const { data, isLoading } = useAllBookmarkItemQuery({});
+
   const [deleteBookmark] = useDeleteBookmarkMutation();
 
   const theme = useTheme();

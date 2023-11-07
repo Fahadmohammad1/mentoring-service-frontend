@@ -1,3 +1,4 @@
+import { IService } from "@/types";
 import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
@@ -25,6 +26,12 @@ export const serviceApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    myServices: build.query({
+      query: () => ({
+        url: "/service/my-services",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -32,4 +39,5 @@ export const {
   useAddServiceMutation,
   useAllServiceQuery,
   useSingleServiceQuery,
+  useMyServicesQuery,
 } = serviceApi;
