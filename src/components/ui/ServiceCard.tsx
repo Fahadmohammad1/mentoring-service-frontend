@@ -88,6 +88,7 @@ const ServiceCard = ({ service }: { service: IService }) => {
 
                 <Button
                   title="book the service"
+                  onClick={() => router.push(`/booking?id=${service.id}`)}
                   variant="outlined"
                   className="flex items-center gap-3   bg-[#F9A14A] hover:border text-black hover:bg-white hover:border-[#4EAC95]"
                 >

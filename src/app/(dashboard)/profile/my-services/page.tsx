@@ -1,12 +1,12 @@
 "use client";
 
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/components/ui/ServiceTable";
 import Loading from "@/components/ui/Loading";
 import { useMyServicesQuery } from "@/redux/api/serviceApi";
+import ServiceTable from "@/components/ui/ServiceTable";
 
 const MyServices = () => {
   const { data, isLoading } = useMyServicesQuery({});
-  console.log(data);
 
   if (isLoading) {
     return <Loading />;
@@ -14,7 +14,7 @@ const MyServices = () => {
   return (
     <section>
       <h1 className="font-bold">All your services are here</h1>
-      <DataTable />
+      <ServiceTable data={data} />
     </section>
   );
 };
