@@ -6,24 +6,28 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import learning from "../../assets/Online learning-bro.png";
 import { useSingleServiceQuery } from "@/redux/api/serviceApi";
 import Loading from "@/components/ui/Loading";
+import { ITimeSlot } from "@/types";
 
 type Inputs = {
-  name?: string;
+  title?: string;
   location?: string;
   authorName?: string;
   authorEmail?: string;
   category?: string;
-  description?: string;
+  status?: string;
+  type?: string;
   fee?: number;
+  slotId?: string;
 };
 
 const CreateBookingPage = () => {
   const searchParams = useSearchParams();
   const serviceId = searchParams.get("id");
   const { data, isLoading } = useSingleServiceQuery(serviceId);
+  console.log(data);
+
   const { userId } = useAppSelector((state) => state.user.user);
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
@@ -33,25 +37,36 @@ const CreateBookingPage = () => {
     { Location: "location" },
     { Category: "category" },
     { Status: "status" },
-    { Description: "description" },
+    { Type: "type" },
   ];
 
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors, touchedFields },
     reset,
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      title: data?.title || "Not Set",
+      category: data?.category || "Not Set",
+      status: data?.status || "Not Set",
+      location: data?.location || "Not Set",
+      type: data?.type || "Not Set",
+      fee: data?.fee || 0,
+    },
+  });
 
   useEffect(() => {
     if (user.role !== "teacher") {
-      toast.error("Please create teacher profile");
+      toast.error("Please create profile as a teacher");
       router.push("/profile");
     }
   }, [router, user.role]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    console.log(data);
     // const res = await addService({
     // }).unwrap();
     // if (res?.id) {
@@ -60,7 +75,7 @@ const CreateBookingPage = () => {
     // } else {
     //   toast.error("failed to add service");
     // }
-    // reset();
+    reset();
   };
 
   if (isLoading) {
@@ -70,9 +85,9 @@ const CreateBookingPage = () => {
   return (
     <section className="mt-20 mx-auto mb-5">
       <h1 className="text-3xl font-bold text-[#F9A14A] text-center py-5">
-        Book service
+        Book this service
       </h1>
-      <div className="flex justify-center items-center flex-row-reverse gap-x-5">
+      <div className="lg:flex flex flex-col-reverse gap-y-10 justify-center items-center lg:flex-row-reverse lg:gap-x-14 lg:gap-y-0">
         <form onSubmit={handleSubmit(onSubmit)} className="mt-3">
           <div className="lg:grid grid-cols-2 gap-3">
             {fields.map((field, i) => (
@@ -81,11 +96,11 @@ const CreateBookingPage = () => {
                   {Object.keys(field)}
                 </p>
                 <input
+                  readOnly
                   {...register(Object.values(field)[0] as keyof Inputs, {
                     required: true,
                   })}
                   type="text"
-                  placeholder={`your service ${Object.values(field)[0]}`}
                   className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
                 />
                 {errors[Object.values(field)[0] as keyof Inputs] &&
@@ -96,16 +111,36 @@ const CreateBookingPage = () => {
                   )}
               </div>
             ))}
+
+            {data?.TimeSlots && (
+              <div className="relative mb-3">
+                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute uppercase">
+                  Date
+                </p>
+                <select
+                  {...register("slotId")}
+                  className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
+                  placeholder="Select date"
+                >
+                  {data?.TimeSlots.map((slot: ITimeSlot) => (
+                    <option key={slot.id} value={slot.id}>
+                      {slot.date} | {slot.startTime} - {slot.endTime}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
             <div className="relative mb-3">
               <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute uppercase">
                 Fee
               </p>
               <input
+                readOnly
                 {...register("fee", {
                   required: true,
                 })}
                 type="number"
-                placeholder="$20 or $0"
                 className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
               />
               {errors.fee && (
@@ -122,7 +157,7 @@ const CreateBookingPage = () => {
             </div>
           </div>
         </form>
-        <Image src={learning} height={300} width={450} alt="professor" />
+        <Image src={data?.thumbnail} height={400} width={400} alt="professor" />
       </div>
     </section>
   );

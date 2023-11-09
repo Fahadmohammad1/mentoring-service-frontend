@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import banner from "../../assets/Webinar.gif";
 import { Button } from "@mui/material";
 import { SiGooglemeet } from "react-icons/si";
+import { useRouter } from "next/navigation";
 
 const Banner = () => {
+  const router = useRouter();
   return (
     <section className="dark:text-black h-screen lg:mt-10 mt-20 lg:px-2 xl:px-0">
       <div className="lg:grid grid-cols-12 lg:h-full flex flex-col-reverse">
@@ -17,6 +21,7 @@ const Banner = () => {
           </h1>
           <Button
             variant="outlined"
+            onClick={() => router.push("/services")}
             className="flex items-center lg:w-1/4 w-2/4 gap-3 mt-7 bg-[#F9A14A] hover:border-1 text-black hover:border-[#4EAC95]"
           >
             Book

@@ -14,6 +14,13 @@ export type IUser = {
   email: string | null;
   role: string | null;
 };
+export type ITimeSlot = {
+  id: string;
+  serviceId: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+};
 
 export type IGenericErrorResponse = {
   statusCode: number;
