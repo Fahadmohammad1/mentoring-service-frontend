@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useSingleServiceQuery } from "@/redux/api/serviceApi";
 import Loading from "@/components/ui/Loading";
 import { ITimeSlot } from "@/types";
+import { useAddToBookingMutation } from "@/redux/api/bookingApi";
 
 type Inputs = {
   title?: string;
@@ -27,6 +28,7 @@ const CreateBookingPage = () => {
   const serviceId = searchParams.get("id");
   const { data, isLoading } = useSingleServiceQuery(serviceId);
   console.log(data);
+  const [addToBooking] = useAddToBookingMutation();
 
   const { userId } = useAppSelector((state) => state.user.user);
   const router = useRouter();
@@ -67,14 +69,13 @@ const CreateBookingPage = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data);
-    // const res = await addService({
-    // }).unwrap();
-    // if (res?.id) {
-    //   toast.success("Service added");
-    //   router.push("/");
-    // } else {
-    //   toast.error("failed to add service");
-    // }
+    const res = await addToBooking({}).unwrap();
+    if (res?.id) {
+      toast.success("Service booked");
+      router.push("/profile");
+    } else {
+      toast.error("failed to book service");
+    }
     reset();
   };
 
