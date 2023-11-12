@@ -24,6 +24,7 @@ import { BiSolidUserAccount } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import { MdVideoSettings } from "react-icons/md";
 import { useAppSelector } from "@/redux/hooks";
+import { IoTicket } from "react-icons/io5";
 
 const drawerWidth = 240;
 
@@ -152,7 +153,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Profile", "My Services", "Send email"].map((text, index) => (
+          {["Profile", "My Services", "My Bookings"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               {index === 0 && (
                 <ListItemButton
@@ -202,6 +203,36 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                         <MdVideoSettings
                           className={`text-2xl ${
                             pathname === "/profile/my-services"
+                              ? "text-[#F9A14A]"
+                              : ""
+                          } rounded-r-full`}
+                        />
+                      </Link>
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              )}
+              {index === 2 && (
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {index === 2 && (
+                      <Link href="/profile/my-bookings">
+                        <IoTicket
+                          className={`text-2xl ${
+                            pathname === "/profile/my-bookings"
                               ? "text-[#F9A14A]"
                               : ""
                           } rounded-r-full`}
