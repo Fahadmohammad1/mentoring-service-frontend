@@ -27,8 +27,8 @@ const CreateBookingPage = () => {
   const searchParams = useSearchParams();
   const serviceId = searchParams.get("id");
   const { data, isLoading } = useSingleServiceQuery(serviceId);
-  console.log(data);
-  const [addToBooking] = useAddToBookingMutation();
+
+  const [addToBooking, result] = useAddToBookingMutation();
 
   const { userId } = useAppSelector((state) => state.user.user);
   const router = useRouter();
@@ -51,26 +51,38 @@ const CreateBookingPage = () => {
     reset,
   } = useForm<Inputs>({
     defaultValues: {
-      title: data?.title || "Not Set",
-      category: data?.category || "Not Set",
-      status: data?.status || "Not Set",
-      location: data?.location || "Not Set",
-      type: data?.type || "Not Set",
-      fee: data?.fee || 0,
+      title: "Not Set",
+      category: "Not Set",
+      status: "Not Set",
+      location: "Not Set",
+      type: "Not Set",
+      fee: 0,
     },
   });
 
   useEffect(() => {
-    if (user.role !== "teacher") {
-      toast.error("Please create profile as a teacher");
+    if (data) {
+      Object.keys(data).forEach((key) => {
+        setValue(key as keyof Inputs, data[key]);
+      });
+    }
+  }, [data, setValue]);
+
+  useEffect(() => {
+    if (user.role !== "student") {
+      toast.error("Please create student profile");
       router.push("/profile");
     }
   }, [router, user.role]);
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
-    const res = await addToBooking({}).unwrap();
-    if (res?.id) {
+  const onSubmit: SubmitHandler<Inputs> = async (service) => {
+    const res = await addToBooking({
+      userId,
+      serviceId: data.id,
+      timeSlotId: service.slotId,
+    }).unwrap();
+    console.log(res);
+    if (res?.id || result.isSuccess) {
       toast.success("Service booked");
       router.push("/profile");
     } else {
@@ -79,7 +91,11 @@ const CreateBookingPage = () => {
     reset();
   };
 
-  if (isLoading) {
+  if (result.isError) {
+    toast.error("failed to book service");
+  }
+
+  if (isLoading || result.isLoading) {
     return <Loading />;
   }
 

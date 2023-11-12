@@ -17,8 +17,8 @@ export type Inputs = {
   contactNo: string;
   gender: string;
   presentAddress: string;
-  class: string;
-  institutionName: string;
+  standard: string;
+  institution: string;
 };
 
 const CreateStudentProfile = () => {
@@ -33,8 +33,8 @@ const CreateStudentProfile = () => {
     { Contact: "contactNo" },
     { Gender: "gender" },
     { Address: "presentAddress" },
-    { class: "class" },
-    { institution: "institutionName" },
+    { class: "standard" },
+    { institution: "institution" },
   ];
   const {
     register,

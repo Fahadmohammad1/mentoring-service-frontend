@@ -32,18 +32,14 @@ const UpcomingServices = () => {
               About Upcoming events
             </h1>
             <p className="text-justify">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo
-              beatae ut sequi velit fuga. Dolor inventore aut natus optio soluta
-              rem ullam molestiae quas provident vero iusto est labore nobis,
-              architecto excepturi a beatae, illum praesentium. Hic repudiandae
-              eligendi reprehenderit deleniti nostrum sed mollitia tempore quasi
-              repellat itaque ipsam labore nesciunt sequi ducimus quaerat
-              dignissimos quae, delectus commodi voluptates a. Aut assumenda,
-              dignissimos facere neque veritatis iure facilis quaerat sequi
-              atque, in quibusdam et, vitae quod nulla eum iste ullam
-              exercitationem explicabo. Nostrum distinctio voluptas minima
-              quaerat iste asperiores impedit voluptate provident? Unde alias
-              aperiam vero numquam nulla placeat veritatis?
+              Get ready to embark on a journey of knowledge and discovery with
+              our upcoming events! At Mentor platform, we believe in fostering a
+              community of lifelong learners, and our events are designed to
+              ignite your curiosity and passion for learning. Mark your
+              calendars and join us for an unforgettable experience. Our events
+              are crafted to provide you with valuable insights and knowledge
+              from experts in the field. Connect with like-minded individuals,
+              speakers, and industry professionals to expand your network.
             </p>
           </CardContent>
         </Card>
