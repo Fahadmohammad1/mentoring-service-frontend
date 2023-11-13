@@ -1,5 +1,6 @@
 "use client";
 
+import BookingTable from "@/components/ui/BookingTable";
 import Loading from "@/components/ui/Loading";
 import { useMyBookingsQuery } from "@/redux/api/bookingApi";
 
@@ -13,18 +14,7 @@ const MyBookings = () => {
 
   return (
     <section>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
-      <h1>heloooooooooooooooooooo</h1>
+      <BookingTable data={data} />
     </section>
   );
 };
