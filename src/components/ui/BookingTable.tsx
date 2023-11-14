@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,20 +10,14 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
 interface Data {
   id: number;
-  calories: number;
+  title: string;
   carbs: number;
   fat: number;
   name: string;
@@ -116,7 +109,7 @@ const headCells: readonly HeadCell[] = [
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Dessert (100g serving)",
+    label: "Title",
   },
   {
     id: "calories",
@@ -157,21 +150,14 @@ interface EnhancedTableProps {
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
-  const {
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
+  const { order, orderBy, onRequestSort } = props;
   const createSortHandler =
     (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
 
   return (
-    <TableHead>
+    <TableHead className="bg-[#F9A14A]">
       <TableRow>
         <TableCell padding="checkbox"></TableCell>
         {headCells.map((headCell) => (
@@ -202,7 +188,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 
 export default function BookingTable({ data }) {
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof Data>("calories");
+  const [orderBy, setOrderBy] = React.useState<keyof Data>("");
   const [selected, setSelected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);

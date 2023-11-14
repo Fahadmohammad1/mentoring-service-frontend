@@ -5,6 +5,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 
 export default function ServiceTable({ data }: { data: IService[] }) {
+  console.log(data);
   return (
     <div className="overflow-x-auto">
       <div className="min-w-screen min-h-screen flex justify-center font-sans overflow-hidden overflow-x-auto">
@@ -64,7 +65,9 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                             <div className="flex items-center">
                               <div className=""></div>
                               <span className="font-medium text-left w-full">
-                                {value}
+                                {typeof value === "object"
+                                  ? JSON.stringify(value)
+                                  : value}
                               </span>
                             </div>
                           </td>
