@@ -19,6 +19,12 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                       (key) =>
                         ![
                           "id",
+                          "description",
+                          "TimeSlots",
+                          "Booking",
+                          "Bookmark",
+                          "Reviews",
+                          "user",
                           "userId",
                           "thumbnail",
                           "location",
@@ -48,6 +54,12 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                       ([key, value]) =>
                         ![
                           "id",
+                          "description",
+                          "TimeSlots",
+                          "Booking",
+                          "Bookmark",
+                          "Reviews",
+                          "user",
                           "userId",
                           "thumbnail",
                           "location",
