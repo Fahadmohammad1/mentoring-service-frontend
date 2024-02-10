@@ -6,7 +6,7 @@ import { useMyBookingsQuery } from "@/redux/api/bookingApi";
 
 const MyBookings = () => {
   const { data, isLoading } = useMyBookingsQuery({});
-  console.log(data);
+  // console.log(data);
 
   if (isLoading) {
     return <Loading />;

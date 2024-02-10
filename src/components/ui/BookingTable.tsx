@@ -14,12 +14,15 @@ import Paper from "@mui/material/Paper";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { visuallyHidden } from "@mui/utils";
+import { IService } from "@/types";
+import { AiFillEdit } from "react-icons/ai";
 
 interface Data {
   id: string;
-  title: string;
+  service: IService;
   timeSlots: string;
   status: string;
+  actions: string;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -70,7 +73,7 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
   {
-    id: "title",
+    id: "service",
     numeric: false,
     disablePadding: true,
     label: "Title",
@@ -79,13 +82,19 @@ const headCells: readonly HeadCell[] = [
     id: "timeSlots",
     numeric: true,
     disablePadding: false,
-    label: "timeSlots",
+    label: "Time Slot",
   },
   {
     id: "status",
     numeric: true,
     disablePadding: false,
     label: "Status",
+  },
+  {
+    id: "actions",
+    numeric: true,
+    disablePadding: false,
+    label: "Actions",
   },
 ];
 
@@ -141,7 +150,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 
 export default function BookingTable({ data }: { data: any }) {
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof Data>("");
+  const [orderBy, setOrderBy] = React.useState("");
   const [selected, setSelected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -255,8 +264,17 @@ export default function BookingTable({ data }: { data: any }) {
                     >
                       {row.service.title}
                     </TableCell>
-                    <TableCell align="left">{row.timeSlots.id}</TableCell>
+                    <TableCell align="left">
+                      {row.timeSlots.startTime} - {row.timeSlots.endTime}
+                    </TableCell>
                     <TableCell align="left">{row.status}</TableCell>
+                    <TableCell align="left">
+                      <div className="flex item-center">
+                        <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                          <AiFillEdit className="text-2xl text-[#4EAC95] cursor-pointer" />
+                        </div>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 );
               })}
