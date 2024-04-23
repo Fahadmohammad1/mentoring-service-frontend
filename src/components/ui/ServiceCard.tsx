@@ -39,9 +39,9 @@ const ServiceCard = ({ service }: { service: IService }) => {
 
   return (
     <StyledBadge
-      color={service?.type === "offline" ? "primary" : "warning"}
+      color={service?.lessonType === "offline" ? "primary" : "warning"}
       className="px-4 lg:px-0"
-      badgeContent={service?.type}
+      badgeContent={service?.lessonType}
       max={1}
     >
       <div className="p-4 mb-10 lg:mb-0 items-center justify-center lg:w-[590px] rounded-xl group sm:flex space-x-6  bg-white bg-opacity-50 shadow-md border hover:border-[#4EAC95] mx-auto">

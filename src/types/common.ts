@@ -34,8 +34,8 @@ export type IGenericErrorMessage = {
 };
 
 export enum ServiceType {
-  "online",
-  "offline",
+  "pre_recorded",
+  "live",
 }
 
 export type IService = {
@@ -51,8 +51,7 @@ export type IService = {
   category: string;
   fee: number;
   badge: string[];
-  type: string;
-  status: string;
+  lessonType: string;
   createdAt: string;
   updatedAt: string;
 };

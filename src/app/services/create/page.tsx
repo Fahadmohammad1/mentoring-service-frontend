@@ -10,6 +10,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import professor from "../../../assets/Professor.gif";
 import Image from "next/image";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
 
 type Inputs = {
   name?: string;
@@ -19,7 +23,7 @@ type Inputs = {
   category?: string;
   description?: string;
   fee?: number;
-  type: ServiceType;
+  lessonType: ServiceType;
 };
 
 const CreateService = () => {
@@ -29,11 +33,15 @@ const CreateService = () => {
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
 
+  const [lessonType, setLessonType] = useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setLessonType(event.target.value);
+  };
+
   const fields = [
     { Title: "title" },
-    { Location: "location" },
     { Category: "category" },
-    { Status: "status" },
     { Description: "description" },
   ];
 
@@ -53,13 +61,13 @@ const CreateService = () => {
   }, [router, user.role]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const { fee, type } = data;
+    const { fee, lessonType } = data;
     const res = await addService({
       ...data,
       userId,
       thumbnail: imageUrl,
       fee: Number(fee),
-      type,
+      lessonType,
     }).unwrap();
 
     if (res?.id) {
@@ -82,7 +90,7 @@ const CreateService = () => {
           <div className="lg:grid grid-cols-2 gap-3">
             {fields.map((field, i) => (
               <div key={i} className="relative mb-3">
-                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute uppercase">
+                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-1.5 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute uppercase">
                   {Object.keys(field)}
                 </p>
                 <input
@@ -102,7 +110,7 @@ const CreateService = () => {
               </div>
             ))}
             <div className="relative mb-3">
-              <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute uppercase">
+              <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-1.5 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute uppercase">
                 Fee
               </p>
               <input
@@ -118,18 +126,25 @@ const CreateService = () => {
               )}
             </div>
             <div className="relative mb-3">
-              <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute uppercase">
-                ServiceType
-              </p>
-              <input
-                {...register("type", {
-                  required: true,
-                })}
-                type="text"
-                placeholder="online or offline"
-                className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-3 pr-4 pb-3 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-              />
-              {errors.type && (
+              <FormControl sx={{ m: 1, minWidth: 300 }} className="m-0">
+                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute uppercase z-20">
+                  Lesson Type
+                </p>
+                <Select
+                  {...register("lessonType", {
+                    required: true,
+                  })}
+                  labelId="lesson-type-label"
+                  id="lesson-type-small"
+                  value={lessonType}
+                  label="Lesson Type"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={"pre-recorded"}>Pre-recorded</MenuItem>
+                  <MenuItem value={"live"}>Live</MenuItem>
+                </Select>
+              </FormControl>
+              {errors.lessonType && (
                 <span className="text-red-600">Service type is required</span>
               )}
             </div>

@@ -22,7 +22,7 @@ const Banner = () => {
           <Button
             variant="outlined"
             onClick={() => router.push("/services")}
-            className="flex items-center lg:w-1/4 w-2/4 gap-3 mt-7 bg-[#F9A14A] hover:border-1 text-black hover:border-[#4EAC95]"
+            className="flex items-center lg:w-1/4 w-2/4 gap-3 mt-7 bg-[#F9A14A] hover:border-1 text-black hover:border-[#4EAC95] font-bold"
           >
             Book
             <SiGooglemeet />

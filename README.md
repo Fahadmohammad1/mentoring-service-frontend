@@ -1,5 +1,16 @@
 ## Technology Used
 
+### Frontend
+
+- Typescript
+- Next JS
+- React JS
+- React Redux and Redux toolkit
+- Axios
+- React hook form
+- Tailwind (CSS library)
+- Material UI (Component library)
+
 ### Backend
 
 - Typescript
@@ -12,23 +23,10 @@
 - ZOD
 - Bcrypt
 
-### Frontend
-
-- Typescript
-- Next JS
-- React JS
-- React Redux and Redux toolkit
-- Axios
-- React hook form
-- Tailwind (CSS library)
-- Material UI (Component library)
-
 ### Database
 
 - PostgreSQL
 
-### API Endpoints
-
-**Live Link**
+### Live Link
 
 https://tutoring-service-frontend.vercel.app/
