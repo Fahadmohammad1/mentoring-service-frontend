@@ -33,7 +33,7 @@ export type IGenericErrorMessage = {
   message: string;
 };
 
-export enum ServiceType {
+export enum LessonType {
   "pre_recorded",
   "live",
 }

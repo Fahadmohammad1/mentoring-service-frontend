@@ -3,7 +3,7 @@
 import UploadImage from "@/components/Form/UploadImage";
 import { useAddServiceMutation } from "@/redux/api/serviceApi";
 import { useAppSelector } from "@/redux/hooks";
-import { ServiceType } from "@/types";
+import { LessonType } from "@/types";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -11,7 +11,6 @@ import toast from "react-hot-toast";
 import professor from "../../../assets/Professor.gif";
 import Image from "next/image";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
@@ -23,7 +22,7 @@ type Inputs = {
   category?: string;
   description?: string;
   fee?: number;
-  lessonType: ServiceType;
+  lessonType: LessonType;
 };
 
 const CreateService = () => {
@@ -62,6 +61,7 @@ const CreateService = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { fee, lessonType } = data;
+    console.log(lessonType);
     const res = await addService({
       ...data,
       userId,
@@ -140,7 +140,7 @@ const CreateService = () => {
                   label="Lesson Type"
                   onChange={handleChange}
                 >
-                  <MenuItem value={"pre-recorded"}>Pre-recorded</MenuItem>
+                  <MenuItem value={"pre_recorded"}>Pre-recorded</MenuItem>
                   <MenuItem value={"live"}>Live</MenuItem>
                 </Select>
               </FormControl>

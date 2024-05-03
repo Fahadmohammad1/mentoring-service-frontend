@@ -36,10 +36,10 @@ const UploadImage = ({ setImageUrl }: any) => {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "content-type": "multipart/form-data",
           },
           params: {
-            key: "17a1f31c430dd052479eea1b87a88985",
+            key: "e62e37f2ab13f543f642c3566276fee5",
           },
         }
       );

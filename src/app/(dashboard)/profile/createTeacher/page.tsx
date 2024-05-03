@@ -17,7 +17,7 @@ type Inputs = {
   contactNo: string;
   gender: string;
   presentAddress: string;
-  class: string;
+  standard: string;
   institutionName: string;
   designation: string;
   yearOfExperience: string;
