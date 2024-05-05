@@ -13,10 +13,17 @@ import Image from "next/image";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import { DateTimePicker } from "@mui/x-date-pickers";
+import dayjs, { Dayjs } from "dayjs";
+import { DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import localizedFromat from "dayjs/plugin/localizedFormat";
+dayjs.extend(localizedFromat);
 
 type Inputs = {
   name?: string;
-  location?: string;
+  language?: string;
   authorName?: string;
   authorEmail?: string;
   category?: string;
@@ -34,6 +41,39 @@ const CreateService = () => {
 
   const [lessonType, setLessonType] = useState("");
 
+  // -------------------------------
+  // Get current date and time
+  let currentDate = new Date();
+
+  // Extract individual components
+  let day: any = currentDate.getDate();
+  let month: any = currentDate.getMonth() + 1; // Note: Month is zero-based, so we add 1
+  let year: any = currentDate.getFullYear();
+  let hours: any = currentDate.getHours();
+  let minutes: any = currentDate.getMinutes();
+  let seconds: any = currentDate.getSeconds();
+
+  // Format components as needed
+  // Ensure leading zeros for single-digit values
+  if (day < 10) {
+    day = "0" + day;
+  }
+  if (month < 10) {
+    month = "0" + month;
+  }
+  if (hours < 10) {
+    hours = "0" + hours;
+  }
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  const [dateTime, setDateTime] = useState<Dayjs | null | any>(dayjs());
+
+  //---------------------------------
+
   const handleChange = (event: SelectChangeEvent) => {
     setLessonType(event.target.value);
   };
@@ -42,6 +82,7 @@ const CreateService = () => {
     { Title: "title" },
     { Category: "category" },
     { Description: "description" },
+    { Language: "language" },
   ];
 
   const {
@@ -60,23 +101,23 @@ const CreateService = () => {
   }, [router, user.role]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const { fee, lessonType } = data;
-    console.log(lessonType);
-    const res = await addService({
-      ...data,
-      userId,
-      thumbnail: imageUrl,
-      fee: Number(fee),
-      lessonType,
-    }).unwrap();
+    // const { fee, lessonType } = data;
 
-    if (res?.id) {
-      toast.success("Service added");
-      router.push("/");
-    } else {
-      toast.error("failed to add service");
-    }
+    // const res = await addService({
+    //   ...data,
+    //   userId,
+    //   thumbnail: imageUrl,
+    //   fee: Number(fee),
+    //   lessonType,
+    // }).unwrap();
 
+    // if (res?.id) {
+    //   toast.success("Service added");
+    //   router.push("/");
+    // } else {
+    //   toast.error("failed to add service");
+    // }
+    console.log(dayjs(dateTime).format("LLLL"));
     reset();
   };
 
@@ -148,6 +189,21 @@ const CreateService = () => {
                 <span className="text-red-600">Service type is required</span>
               )}
             </div>
+            {lessonType === "live" && (
+              <div className="relative mb-3">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoItem label="Live Schedule">
+                    <DateTimePicker
+                      value={dateTime}
+                      onChange={(newValue) => setDateTime(newValue)}
+                    />
+                  </DemoItem>
+                </LocalizationProvider>
+                {errors.lessonType && (
+                  <span className="text-red-600">Service type is required</span>
+                )}
+              </div>
+            )}
             <div className="relative mb-3">
               <UploadImage setImageUrl={setImageUrl} />
             </div>
