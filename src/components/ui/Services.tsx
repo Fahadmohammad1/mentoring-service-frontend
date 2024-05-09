@@ -7,6 +7,7 @@ import Loading from "./Loading";
 
 const Services = () => {
   const { data, isLoading } = useAllServiceQuery({});
+  console.log(data);
   if (isLoading) {
     return <Loading />;
   }

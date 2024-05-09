@@ -41,38 +41,7 @@ const CreateService = () => {
 
   const [lessonType, setLessonType] = useState("");
 
-  // -------------------------------
-  // Get current date and time
-  let currentDate = new Date();
-
-  // Extract individual components
-  let day: any = currentDate.getDate();
-  let month: any = currentDate.getMonth() + 1; // Note: Month is zero-based, so we add 1
-  let year: any = currentDate.getFullYear();
-  let hours: any = currentDate.getHours();
-  let minutes: any = currentDate.getMinutes();
-  let seconds: any = currentDate.getSeconds();
-
-  // Format components as needed
-  // Ensure leading zeros for single-digit values
-  if (day < 10) {
-    day = "0" + day;
-  }
-  if (month < 10) {
-    month = "0" + month;
-  }
-  if (hours < 10) {
-    hours = "0" + hours;
-  }
-  if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
-  if (seconds < 10) {
-    seconds = "0" + seconds;
-  }
-  const [dateTime, setDateTime] = useState<Dayjs | null | any>(dayjs());
-
-  //---------------------------------
+  const [dateTime, setDateTime] = useState<Dayjs | null>(dayjs());
 
   const handleChange = (event: SelectChangeEvent) => {
     setLessonType(event.target.value);
@@ -101,23 +70,24 @@ const CreateService = () => {
   }, [router, user.role]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    // const { fee, lessonType } = data;
+    const { fee, lessonType } = data;
 
-    // const res = await addService({
-    //   ...data,
-    //   userId,
-    //   thumbnail: imageUrl,
-    //   fee: Number(fee),
-    //   lessonType,
-    // }).unwrap();
+    const res = await addService({
+      ...data,
+      userId,
+      thumbnail: imageUrl,
+      fee: Number(fee),
+      lessonType,
+      schedule: dateTime ? dayjs(dateTime).format("LLLL") : "",
+    }).unwrap();
 
-    // if (res?.id) {
-    //   toast.success("Service added");
-    //   router.push("/");
-    // } else {
-    //   toast.error("failed to add service");
-    // }
-    console.log(dayjs(dateTime).format("LLLL"));
+    if (res?.id) {
+      toast.success("Service added");
+      router.push("/");
+    } else {
+      toast.error("failed to add service");
+    }
+
     reset();
   };
 
