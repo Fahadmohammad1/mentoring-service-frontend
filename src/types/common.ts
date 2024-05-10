@@ -43,7 +43,7 @@ export type IService = {
   userId: string;
   thumbnail: string;
   title: string;
-  location: string;
+  language: string;
   authorName: string;
   authorEmail: string;
   authorImage: string;

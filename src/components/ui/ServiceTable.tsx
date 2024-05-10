@@ -1,10 +1,19 @@
 "use client";
 
 import { IService } from "@/types";
+import toast from "react-hot-toast";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 
 export default function ServiceTable({ data }: { data: IService[] }) {
+  const deleteService = (id: string) => {
+    toast((t) => (
+      <span>
+        Are you sure? Action cannot be undone
+        <button onClick={() => toast.dismiss(t.id)}>Close</button>
+      </span>
+    ));
+  };
   return (
     <div className="overflow-x-auto">
       <div className="min-w-screen min-h-screen flex justify-center font-sans overflow-hidden overflow-x-auto">
@@ -19,14 +28,13 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                         ![
                           "id",
                           "description",
-                          "TimeSlots",
                           "Booking",
                           "Bookmark",
                           "Reviews",
+                          "language",
                           "user",
                           "userId",
                           "thumbnail",
-                          "location",
                           "authorEmail",
                           "authorImage",
                           "authorName",
@@ -54,14 +62,13 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                         ![
                           "id",
                           "description",
-                          "TimeSlots",
                           "Booking",
                           "Bookmark",
                           "Reviews",
+                          "language",
                           "user",
                           "userId",
                           "thumbnail",
-                          "location",
                           "authorEmail",
                           "authorImage",
                           "authorName",
@@ -76,9 +83,7 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                             <div className="flex items-center">
                               <div className=""></div>
                               <span className="font-medium text-left w-full">
-                                {typeof value === "object"
-                                  ? JSON.stringify(value)
-                                  : value}
+                                {value}
                               </span>
                             </div>
                           </td>
@@ -91,7 +96,10 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                           <AiFillEdit className="text-lg text-[#4EAC95] cursor-pointer" />
                         </div>
                         <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                          <MdDelete className="text-lg text-red-500 cursor-pointer" />
+                          <MdDelete
+                            onClick={() => deleteService(service.id)}
+                            className="text-lg text-red-500 cursor-pointer"
+                          />
                         </div>
                       </div>
                     </td>

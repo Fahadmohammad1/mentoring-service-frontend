@@ -31,6 +31,12 @@ export const serviceApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    deleteService: build.query({
+      query: (id) => ({
+        url: `/service/delete-service/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
