@@ -1,18 +1,42 @@
 "use client";
 
+import { useDeleteServiceMutation } from "@/redux/api/serviceApi";
 import { IService } from "@/types";
-import toast from "react-hot-toast";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
+import Swal from "sweetalert2";
 
 export default function ServiceTable({ data }: { data: IService[] }) {
-  const deleteService = (id: string) => {
-    toast((t) => (
-      <span>
-        Are you sure? Action cannot be undone
-        <button onClick={() => toast.dismiss(t.id)}>Close</button>
-      </span>
-    ));
+  const [deleteService] = useDeleteServiceMutation();
+
+  const handleDeleteService = (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await deleteService(id);
+        console.log(res);
+        if (res?.data) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        } else {
+          Swal.fire({
+            title: "Failed!",
+            text: "Something went wrong.",
+            icon: "error",
+          });
+        }
+      }
+    });
   };
   return (
     <div className="overflow-x-auto">
@@ -22,32 +46,33 @@ export default function ServiceTable({ data }: { data: IService[] }) {
             <table className="min-w-max w-full table-auto overflow-x-auto">
               <thead>
                 <tr className="bg-[#F9A14A] text-black uppercase text-xs sm:text-sm">
-                  {Object.keys(data[0])
-                    .filter(
-                      (key) =>
-                        ![
-                          "id",
-                          "description",
-                          "Booking",
-                          "Bookmark",
-                          "Reviews",
-                          "language",
-                          "user",
-                          "userId",
-                          "thumbnail",
-                          "authorEmail",
-                          "authorImage",
-                          "authorName",
-                          "createdAt",
-                          "badge",
-                          "updatedAt",
-                        ].includes(key)
-                    )
-                    .map((key) => (
-                      <th key={key} className="py-3 px-6 text-left">
-                        {key}
-                      </th>
-                    ))}
+                  {data &&
+                    Object.keys(data[0])
+                      .filter(
+                        (key) =>
+                          ![
+                            "id",
+                            "description",
+                            "Booking",
+                            "Bookmark",
+                            "Reviews",
+                            "language",
+                            "user",
+                            "userId",
+                            "thumbnail",
+                            "authorEmail",
+                            "authorImage",
+                            "authorName",
+                            "createdAt",
+                            "badge",
+                            "updatedAt",
+                          ].includes(key)
+                      )
+                      .map((key) => (
+                        <th key={key} className="py-3 px-6 text-left">
+                          {key}
+                        </th>
+                      ))}
                   <th className="py-3 px-6 text-center">Actions</th>
                 </tr>
               </thead>
@@ -97,7 +122,7 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                         </div>
                         <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                           <MdDelete
-                            onClick={() => deleteService(service.id)}
+                            onClick={() => handleDeleteService(service.id)}
                             className="text-lg text-red-500 cursor-pointer"
                           />
                         </div>
