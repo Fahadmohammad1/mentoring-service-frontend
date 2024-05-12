@@ -2,12 +2,23 @@
 
 import { useDeleteServiceMutation } from "@/redux/api/serviceApi";
 import { IService } from "@/types";
+import { useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import ServiceEditDialog from "./ServiceEditDialog";
 
 export default function ServiceTable({ data }: { data: IService[] }) {
   const [deleteService] = useDeleteServiceMutation();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleDeleteService = (id: string) => {
     Swal.fire({
@@ -120,7 +131,14 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                     <td className="py-3 px-6 text-center">
                       <div className="flex item-center justify-center">
                         <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                          <AiFillEdit className="text-lg text-[#4EAC95] cursor-pointer" />
+                          <AiFillEdit
+                            onClick={handleClickOpen}
+                            className="text-lg text-[#4EAC95] cursor-pointer"
+                          />
+                          <ServiceEditDialog
+                            handleClose={handleClose}
+                            open={open}
+                          />
                         </div>
                         <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                           <MdDelete

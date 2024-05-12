@@ -75,7 +75,7 @@ const ServiceCard = ({ service }: { service: IService }) => {
             </div>
             <div className="flex items-center space-x-4 justify-between">
               <div className="text-grey-500 flex flex-row space-x-1  my-4">
-                <p className="text-xs">{service?.location}</p>
+                <p className="text-xs">{service?.language}</p>
               </div>
               <div className="flex flex-row space-x-1 justify-center gap-2">
                 <div
