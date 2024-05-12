@@ -22,6 +22,8 @@ export default function ServiceTable({ data }: { data: IService[] }) {
       if (result.isConfirmed) {
         const res = await deleteService(id);
         console.log(res);
+
+        //@ts-ignore
         if (res?.data) {
           Swal.fire({
             title: "Deleted!",
