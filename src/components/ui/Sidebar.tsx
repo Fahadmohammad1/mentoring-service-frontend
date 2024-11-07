@@ -171,7 +171,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                     }}
                   >
                     {index === 0 && (
-                      <Link href="/profile">
+                      <Link title="profile" href="/profile">
                         <BiSolidUserAccount
                           className={`text-2xl ${
                             pathname === "/profile" ? "text-[#F9A14A]" : ""
@@ -229,7 +229,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                     }}
                   >
                     {index === 2 && (
-                      <Link href="/profile/my-bookings">
+                      <Link title="my-bookings" href="/profile/my-bookings">
                         <IoTicket
                           className={`text-2xl ${
                             pathname === "/profile/my-bookings"
@@ -251,7 +251,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
           {["Home"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               {index === 0 && (
-                <Link href="/">
+                <Link title="back to home" href="/">
                   <ListItemButton
                     sx={{
                       minHeight: 48,

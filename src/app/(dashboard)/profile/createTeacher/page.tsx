@@ -61,6 +61,7 @@ const CreateTeacherProfile = () => {
 
     if (res?.data) {
       const { token } = await resetToken({}).unwrap();
+      reset();
       removeUserInfo(tokenKey);
       if (await token) {
         toast.success("Information added");
@@ -70,8 +71,6 @@ const CreateTeacherProfile = () => {
         toast.error("Failed to add information");
       }
     }
-
-    reset();
   };
 
   return (

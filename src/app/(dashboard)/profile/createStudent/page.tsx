@@ -54,6 +54,7 @@ const CreateStudentProfile = () => {
 
     if (res?.data) {
       toast.success("Profile created successfully");
+      reset();
       const { token } = await resetToken({}).unwrap();
       removeUserInfo(tokenKey);
       if (await token) {
@@ -61,7 +62,6 @@ const CreateStudentProfile = () => {
         router.push("/profile");
       }
     }
-    reset();
   };
 
   return (

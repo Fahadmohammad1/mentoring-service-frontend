@@ -13,7 +13,7 @@ export default function ServiceTable({ data }: { data: IService[] }) {
 
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (id: string) => {
     setOpen(true);
   };
   const handleClose = () => {
@@ -32,10 +32,9 @@ export default function ServiceTable({ data }: { data: IService[] }) {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await deleteService(id);
-        console.log(res);
 
         //@ts-ignore
-        if (res?.data) {
+        if (res?.data?.id) {
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
@@ -59,7 +58,7 @@ export default function ServiceTable({ data }: { data: IService[] }) {
             <table className="min-w-max w-full table-auto overflow-x-auto">
               <thead>
                 <tr className="bg-[#F9A14A] text-black uppercase text-xs sm:text-sm">
-                  {data &&
+                  {data.length &&
                     Object.keys(data[0])
                       .filter(
                         (key) =>
@@ -95,7 +94,7 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                     key={service.id}
                     className="border-b border-gray-200 hover:bg-gray-100"
                   >
-                    {Object.entries(service).map(
+                    {Object?.entries(service).map(
                       ([key, value]) =>
                         ![
                           "id",
@@ -132,7 +131,7 @@ export default function ServiceTable({ data }: { data: IService[] }) {
                       <div className="flex item-center justify-center">
                         <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                           <AiFillEdit
-                            onClick={handleClickOpen}
+                            onClick={() => handleClickOpen(service.id)}
                             className="text-lg text-[#4EAC95] cursor-pointer"
                           />
                           <ServiceEditDialog

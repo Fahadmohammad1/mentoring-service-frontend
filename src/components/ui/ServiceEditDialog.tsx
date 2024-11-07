@@ -23,12 +23,14 @@ type handleCloseType = () => void;
 interface ServiceEditDialogProps {
   handleClose: handleCloseType;
   open: boolean;
+
   children?: ReactNode;
 }
 
 const ServiceEditDialog: React.FC<ServiceEditDialogProps> = ({
   handleClose,
   open,
+
   children,
 }) => {
   return (
