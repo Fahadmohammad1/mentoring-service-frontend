@@ -46,40 +46,25 @@ const ProfilePage = () => {
   const middleName = data?.middleName;
   const lastName = data?.lastName;
   const email = data?.email;
+  const role = data?.role;
 
   // profile data
   const profileData = data?.Profile[0] || {};
 
-  const fullName = profileData.fullName
-    ? profileData.fullName.toString()
-    : null;
-  const presentAddress = profileData.presentAddress
-    ? profileData.presentAddress.toString()
-    : null;
-  const contactNo = profileData.contactNo
-    ? profileData.contactNo.toString()
-    : null;
-  const avatar = profileData.avatar ? profileData.avatar.toString() : null;
-  const degree = profileData.degree ? profileData.degree.toString() : null;
-  const classStandard = profileData.standard
-    ? profileData.standard.toString()
-    : null;
-  const designation = profileData.designation
-    ? profileData.designation.toString()
-    : null;
-  const gender = profileData.gender ? profileData.gender.toString() : null;
-  const institutionName = profileData.institution
-    ? profileData.institution.toString()
-    : null;
-  const occupation = profileData.occupation
-    ? profileData.occupation.toString()
-    : null;
-  const educationalStatus = profileData.educationalStatus
-    ? profileData.educationalStatus.toString()
-    : null;
-  const topicOfExpertise = profileData.topicOfExpertise
-    ? profileData.topicOfExpertise.toString()
-    : null;
+  const {
+    fullName,
+    presentAddress,
+    contactNo,
+    avatar,
+    degree,
+    standard,
+    designation,
+    gender,
+    institution,
+    occupation,
+    educationalStatus,
+    topicOfExpertise,
+  } = profileData;
 
   return (
     <section className="h-fit lg:flex gap-5 mb-10">
@@ -135,7 +120,7 @@ const ProfilePage = () => {
         className="rounded-lg w-full border border-[#F9A14A]"
       >
         <h3 className="font-bold text-center py-1 text-[#F9A14A]">
-          Profile Information
+          {role === "student" ? "Student Profile" : "Mentor Profile"}
         </h3>
         <div className="lg:grid grid-cols-2 gap-1 p-5">
           {firstName && (
@@ -258,15 +243,15 @@ const ProfilePage = () => {
               )}
             </div>
           )}
-          {classStandard && (
+          {standard && (
             <div className="">
               <span className="text-xs  lg:ml-[30px]">Class</span>
-              {classStandard ? (
+              {standard ? (
                 <Card
                   sx={{ maxWidth: 290 }}
                   className="rounded-lg w-full mb-4 border  mx-auto"
                 >
-                  <p className="text-center py-1">{classStandard}</p>
+                  <p className="text-center py-1">{standard}</p>
                 </Card>
               ) : (
                 <Card
@@ -338,15 +323,15 @@ const ProfilePage = () => {
               )}
             </div>
           )}
-          {institutionName && (
+          {institution && (
             <div className="">
               <span className="text-xs  lg:ml-[30px]">Institution</span>
-              {institutionName ? (
+              {institution ? (
                 <Card
                   sx={{ maxWidth: 290 }}
                   className="rounded-lg w-full mb-4 border  mx-auto"
                 >
-                  <p className="text-center py-1">{institutionName}</p>
+                  <p className="text-center py-1">{institution}</p>
                 </Card>
               ) : (
                 <Card
@@ -359,7 +344,7 @@ const ProfilePage = () => {
             </div>
           )}
           {educationalStatus && (
-            <div className="">
+            <div>
               <span className="text-xs  lg:ml-[30px]">Educational Status</span>
               {educationalStatus ? (
                 <Card
@@ -378,10 +363,10 @@ const ProfilePage = () => {
               )}
             </div>
           )}
-          {topicOfExpertise && (
-            <div className="">
+          {topicOfExpertise.length > 1 && (
+            <div>
               <span className="text-xs  lg:ml-[30px]">Topic of Expertise</span>
-              {topicOfExpertise ? (
+              {topicOfExpertise.length > 1 ? (
                 <Card
                   sx={{ maxWidth: 290 }}
                   className="rounded-lg w-full mb-4 border  mx-auto"

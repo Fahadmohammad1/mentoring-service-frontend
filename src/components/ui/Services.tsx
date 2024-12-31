@@ -14,7 +14,7 @@ const Services = () => {
   return (
     <section className="container mx-auto lg:my-24 mt-64 lg:px-5 xl:px-0">
       <h1 className="lg:text-3xl text-xl text-center text-black font-bold mb-10">
-        Services you can book
+        Recently added lessons
       </h1>
       <div className="lg:grid grid-cols-2 gap-x-5 gap-y-10">
         {data?.data &&

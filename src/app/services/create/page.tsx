@@ -82,13 +82,12 @@ const CreateService = () => {
     }).unwrap();
 
     if (res?.id) {
+      reset();
       toast.success("Service added");
       router.push("/");
     } else {
       toast.error("failed to add service");
     }
-
-    reset();
   };
 
   return (
