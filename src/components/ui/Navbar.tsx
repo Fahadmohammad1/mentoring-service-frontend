@@ -16,7 +16,6 @@ import { useEffect, useState } from "react";
 import { Badge } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Link from "next/link";
-import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { tokenKey } from "@/constants/tokenKey";
 import { getFromLocalStorage } from "@/utils/local-storage";
@@ -26,8 +25,9 @@ import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import { toggleBookmarkModal } from "@/redux/features/bookmark/bookmarkSlice";
 import { useAllBookmarkItemQuery } from "@/redux/api/bookmarkApi";
 import Loading from "./Loading";
+import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 
-const pages = ["Services", "Become mentor", "Blog"];
+const pages = ["Lessons", "Become mentor", "Blog"];
 const settings = ["Profile", "Login", "Logout"];
 
 const Navbar = () => {
@@ -38,7 +38,7 @@ const Navbar = () => {
 
   const userData = getFromLocalStorage(tokenKey);
 
-  const { data, isLoading } = useAllBookmarkItemQuery({});
+  // const { data, isLoading } = useAllBookmarkItemQuery({});
 
   if (userData) {
     const { userId, email, role } = getUserInfo() as IUser;
@@ -87,9 +87,9 @@ const Navbar = () => {
     dispatch(setUser({ userId: null, email: null, role: null }));
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <AppBar
@@ -157,13 +157,13 @@ const Navbar = () => {
                   key={page}
                   onClick={handleCloseNavMenu}
                 >
-                  {page === "Services" && (
-                    <Link href="/services">
+                  {page === "Lessons" && (
+                    <Link href="/Lessons">
                       <Typography textAlign="center">{page}</Typography>
                     </Link>
                   )}
                   {page === "Become mentor" && (
-                    <Link href="/services/create">
+                    <Link href="/Lessons/create">
                       <Typography textAlign="center">{page}</Typography>
                     </Link>
                   )}
@@ -198,13 +198,13 @@ const Navbar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page === "Services" && (
-                  <Link href="/services">
+                {page === "Lessons" && (
+                  <Link href="/Lessons">
                     <Typography textAlign="center">{page}</Typography>
                   </Link>
                 )}
                 {page === "Become mentor" && (
-                  <Link href="/services/create">
+                  <Link href="/Lessons/create">
                     <Typography textAlign="center">{page}</Typography>
                   </Link>
                 )}
@@ -214,7 +214,7 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <div className="flex items-center">
-              {userData && (
+              {/* {userData && (
                 <Badge
                   badgeContent={data?.length ? data.length : "0"}
                   color="error"
@@ -226,7 +226,7 @@ const Navbar = () => {
                     <BsFillBookmarkCheckFill className="text-xl"></BsFillBookmarkCheckFill>
                   </span>
                 </Badge>
-              )}
+              )} */}
               <IconButton
                 className="mr-3"
                 size="large"

@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAppSelector } from "@/redux/hooks";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import toast from "react-hot-toast";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -26,7 +27,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const ProfilePage = () => {
-  const { data, isLoading } = useMyProfileQuery({});
+  const { data, isLoading, isError } = useMyProfileQuery({});
 
   const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
@@ -66,6 +67,10 @@ const ProfilePage = () => {
     topicOfExpertise,
   } = profileData;
 
+  if (isError) {
+    toast.error("Failed to fetch profile data");
+  }
+
   return (
     <section className="h-fit lg:flex gap-5 mb-10">
       <Card
@@ -74,14 +79,13 @@ const ProfilePage = () => {
       >
         <CardMedia
           component="img"
-          height="180"
           className="p-10 pb-0 rounded-full"
           image={
             avatar
               ? avatar
               : "https://cdn-icons-png.flaticon.com/512/1053/1053244.png"
           }
-          alt="profile"
+          alt="avatar"
         />
 
         <CardContent>
@@ -119,8 +123,8 @@ const ProfilePage = () => {
         sx={{ minWidth: 290, maxWidth: 750 }}
         className="rounded-lg w-full border border-[#F9A14A]"
       >
-        <h3 className="font-bold text-center py-1 text-[#F9A14A]">
-          {role === "student" ? "Student Profile" : "Mentor Profile"}
+        <h3 className="font-bold text-center py-1 text-[#F9A14A] uppercase">
+          {role ? `${role} Profile` : "Profile Information"}
         </h3>
         <div className="lg:grid grid-cols-2 gap-1 p-5">
           {firstName && (
@@ -363,7 +367,7 @@ const ProfilePage = () => {
               )}
             </div>
           )}
-          {topicOfExpertise.length > 1 && (
+          {topicOfExpertise && topicOfExpertise.length > 1 && (
             <div>
               <span className="text-xs  lg:ml-[30px]">Topic of Expertise</span>
               {topicOfExpertise.length > 1 ? (
